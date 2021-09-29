@@ -1,2 +1,2 @@
 # SLAM
-Land Assets under Management
+System for Land Assets under Management
