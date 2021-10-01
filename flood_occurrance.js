@@ -1,5 +1,11 @@
+
+
 //var longitude=84.74329922964942;
 //var latitude=25.244007840795; 'Sample Location'
+
+var ee = require('@google/earthengine');
+
+
 
 function flood_occurance(longitude,latitude)
 {
@@ -17,3 +23,5 @@ function flood_occurance(longitude,latitude)
   return floods_occurred.get('flooded');
   
 }
+
+console.print("hello GEE")
