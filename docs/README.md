@@ -1,9 +1,6 @@
 # SLAM
 System for Land Assets under Management
 
-## Architecture Diagram
-![LandDB@2x-2](https://user-images.githubusercontent.com/33483920/135498987-aee9e32d-43a4-420b-84c1-571189163906.png)
-
 ## Key Architectural Decisions
 | Decision | Rationale |
 | --- | --- |
