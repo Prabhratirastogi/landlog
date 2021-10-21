@@ -55,9 +55,8 @@ var floods_occurred=flood_data.reduceRegion({
 // GEE Reducer used to find value of a pixel                                           
 var data_dict=years.combine(floods_occurred).getInfo(); // Dictonary of Start Year,End Year and Flooded Pixels
 var nkey='No of Flood Events('+data_dict['start']+'-'+data_dict['end']+')';
-out_dict[nkey]=data_dict['flooded'];
-console.log('Flood',out_dict); // Substituted by a return statement
-}
+out_dict[nkey]=data_dict['flooded']; //Pushing Values to Output Dictionary
+} 
 
 /**
 *The Function extracts the Elevation of the pixel in meters from SRTM 30m DEM
@@ -68,7 +67,7 @@ console.log('Flood',out_dict); // Substituted by a return statement
 
 function elevation()
 {
-var location=ee.Geometry.Point(longitude,latitude);
+var location=ee.Geometry.Point(longitude,latitude); // GEE Point Geometry Constructor
 var dataset = ee.Image('USGS/SRTMGL1_003');
 var elevation_raster = dataset.select('elevation');
 var elevation_dict=elevation_raster.reduceRegion({
@@ -76,8 +75,7 @@ var elevation_dict=elevation_raster.reduceRegion({
                                 geometry: location,
                                 scale:30,
                                 maxPixels: 1e9}).getInfo();
-out_dict['elevation(meters)']=elevation_dict['elevation'];
-console.log('Elevation',out_dict);
+out_dict['elevation(meters)']=elevation_dict['elevation']; // Pushing Value to Output Dictionary
 }
 
 /**
