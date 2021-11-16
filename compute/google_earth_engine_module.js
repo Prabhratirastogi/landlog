@@ -43,20 +43,24 @@ function flood_events ()
 {
 var location=ee.Geometry.Point(longitude,latitude);    // GEE Point Geometry Constructor                         
 var dataset=ee.ImageCollection("GLOBAL_FLOOD_DB/MODIS_EVENTS/V1")
-var flood_data=dataset.select('flooded').sum();	// Flooded Pixels marked by 1 in all years	
-var daterange=ee.List(dataset.toDictionary().get('date_range'));
-var years=ee.Dictionary(['start',ee.Date(daterange.get(0)).format().split('-').get(0),'end',ee.Date(daterange.get(1)).format().split('-').get(0)]);
-// Years Contain the Start and End year of the dataset used                                          
+var flood_data=dataset.select('flooded').sum();	// Flooded Pixels marked by 1 in all years	                                         
 var floods_occurred=flood_data.reduceRegion({
                                              reducer: ee.Reducer.mean(),
                                              geometry: location,
                                              scale:30,
-                                             maxPixels: 1e9}); 
+                                             maxPixels: 1e9}).getInfo(); 
 // GEE Reducer used to find value of a pixel                                           
-var data_dict=years.combine(floods_occurred).getInfo(); // Dictonary of Start Year,End Year and Flooded Pixels
-var nkey='No of Flood Events('+data_dict['start']+'-'+data_dict['end']+')';
-out_dict[nkey]=data_dict['flooded']; //Pushing Values to Output Dictionary
-} 
+var flooded=floods_occurred['flooded'];
+out_dict['No of Flood Events']=flooded;
+if (flooded<=3)
+	out_dict['Flood Serverity']='Low'
+else if (flooded>3 && flooded<=6)
+	out_dict['Flood Serverity']='Medium'
+else if (flooded>6 && flooded<=9)
+	out_dict['Flood Serverity']='High'
+else if (flooded>=10)
+	out_dict['Flood Serverity']='Very High'
+}
 
 /**
 *The Function extracts the Elevation of the pixel in meters from SRTM 30m DEM
@@ -67,7 +71,7 @@ out_dict[nkey]=data_dict['flooded']; //Pushing Values to Output Dictionary
 
 function elevation()
 {
-var location=ee.Geometry.Point(longitude,latitude); // GEE Point Geometry Constructor
+var location=ee.Geometry.Point(longitude,latitude);
 var dataset = ee.Image('USGS/SRTMGL1_003');
 var elevation_raster = dataset.select('elevation');
 var elevation_dict=elevation_raster.reduceRegion({
@@ -75,7 +79,58 @@ var elevation_dict=elevation_raster.reduceRegion({
                                 geometry: location,
                                 scale:30,
                                 maxPixels: 1e9}).getInfo();
-out_dict['elevation(meters)']=elevation_dict['elevation']; // Pushing Value to Output Dictionary
+out_dict['Elevation(meters)']=elevation_dict['elevation'];
+}
+/**
+*The Function extracts the Palmer Drought Severity Index of the pixel  from TerraClimate dataset. The Parameters are passed explicitly
+*@param {double} longitude Longitude of the location ( Defined as Global Variables for Module)
+*@param {double} latitude Latitude of the location   ( Defined as Global Variables for Module)
+*@returns {Number} PDSI Value and Drought Classification
+*/
+function pdsi_index()
+{
+  var location=ee.Geometry.Point(longitude,latitude);
+  var imc=ee.ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")
+  var img=imc.limit(1, 'system:time_start', false).first()
+            .select('pdsi').divide(100);
+  var pdsi_location=img.reduceRegion({reducer: ee.Reducer.mean(),
+                                           geometry: location,
+                                           scale:4000,
+                                           maxPixels: 1e9}).get('pdsi')
+                                           .getInfo();
+  out_dict['Palmer Drought Index']=pdsi_location;
+  if(pdsi_location>=4.0)
+    out_dict['Drought Condition']='Extreme Wet Condition';
+  else if(pdsi_location>=3.0 && pdsi_location<=3.99)
+    out_dict['Drought Condition']='Severe Wet Condition';
+  else if(pdsi_location>=2 && pdsi_location<=2.99)
+    out_dict['Drought Condition']='Moderate Wet Condition';
+  else if(pdsi_location>=1 && pdsi_location<=1.99)
+    out_dict['Drought Condition']='Mild Wet Condition';
+  else if(pdsi_location>=-1 && pdsi_location<=0.99)
+    out_dict['Drought Condition']='Normal';
+  else if(pdsi_location>=-1 && pdsi_location<=-1.99)
+    out_dict['Drought Condition']='Mild Dry Condition';
+  else if(pdsi_location>=-2 && pdsi_location<=-2.99)
+    out_dict['Drought Condition']='Moderate Dry Condition';
+  else if(pdsi_location>=-3 && pdsi_location<=-3.99)
+    out_dict['Drought Condition']='Severe Dry Condition';
+  else
+    out_dict['Drought Condition']='Extreme Dry Condition';
+}
+
+function water_level()
+{
+  var location=ee.Geometry.Point(longitude,latitude);
+  var runoff=ee.ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")
+             .filterBounds(location).mean();
+  var runoff_level=runoff.reduceRegion({reducer: ee.Reducer.mean(),
+                                           geometry: location,
+                                           scale:4000,
+                                           maxPixels: 1e9}).get('ro')
+                                           .getInfo();
+  out_dict['Runoff(mm)']=runoff_level;
+  
 }
 
 /**
@@ -87,7 +142,10 @@ out_dict['elevation(meters)']=elevation_dict['elevation']; // Pushing Value to O
 function Analysis_Module()
 {
 	flood_events();
-	elevation()
+	elevation();
+	pdsi_index();
+	water_level();
+	console.log(out_dict)
 }
 
 /**
