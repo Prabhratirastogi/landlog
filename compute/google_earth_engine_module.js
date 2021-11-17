@@ -9,6 +9,9 @@ var latitude=25.244007840795;
 /**
 *Variable ee Loads the Google Earth Engine npm module from the working directory
 */
+function gee_module(longitude,latitude)
+{
+
 var ee = require('@google/earthengine');
 
 var out_dict={}; // Dictonary for Output
@@ -161,3 +164,6 @@ var runAnalysis=function ()
 *@returns Authrisation_Error message if failed
 */
 ee.data.authenticateViaPrivateKey(privateKey,runAnalysis,Authorisation_Error);
+return out_dict
+}
+gee_module(longitude,latitude)
