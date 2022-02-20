@@ -61,8 +61,8 @@ jobs:
       with:
         push: true # Will only build if this is not here
         tags: |
-          ghcr.io/${{ GHCR_REPOSITORY }}:${{ github.ref }}
-          ghcr.io/${{ GHCR_REPOSITORY }}:latest
+          ghcr.io/${{ env.GHCR_REPOSITORY }}:${{ github.ref }}
+          ghcr.io/${{ env.GHCR_REPOSITORY }}:latest
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
