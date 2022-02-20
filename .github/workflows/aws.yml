@@ -37,7 +37,7 @@ env:
   ECS_SERVICE: dash-fe-service # set this to your Amazon ECS service name
   ECS_CLUSTER: land-ai-dash-fe # set this to your Amazon ECS cluster name
   ECS_TASK_DEFINITION:
-    first-run-task-definition # set this to the path to your Amazon ECS task definition
+    .aws/ecs-task-definition.json # set this to the path to your Amazon ECS task definition
     # file, e.g. .aws/task-definition.json
   CONTAINER_NAME:
     land-ai/dash # set this to the name of the container in the
@@ -58,6 +58,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and Push Docker Image
+        id: build-image
         uses: docker/build-push-action@v2
         with:
           push: true # Will only build if this is not here
@@ -76,9 +77,9 @@ jobs:
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition: ${{ env.ECS_TASK_DEFINITION }}
-          container-name: ${{ env.CONTAINER_NAME }}
+          #         container-name: ${{ env.CONTAINER_NAME }}
+          container-name: ghcr.io/${{ env.GHCR_REPOSITORY }}
           image: ${{ steps.build-image.outputs.image }}
-
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
