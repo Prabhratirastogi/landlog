@@ -10,3 +10,5 @@
 - [Github Docker Registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry)
 - [Docker Login from Github Actions](https://github.com/marketplace/actions/docker-login)
 - [GCHR.io Access Permissions](https://docs.github.com/en/packages/managing-github-packages-using-github-actions-workflows/publishing-and-installing-a-package-with-github-actions#upgrading-a-workflow-that-accesses-ghcrio)
+- [Deploy to AWS ECS with Github actions](https://dev.to/iacons/deploy-to-aws-ecs-with-github-actions-3365)
+- [Inserts a container image URI into an Amazon ECS task definition](https://github.com/aws-actions/amazon-ecs-render-task-definition)
