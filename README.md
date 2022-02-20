@@ -8,7 +8,7 @@
 
 ```sh
 # Build
-$ docker build -t land-ai/dash-fe .
+$ docker build -t gchr.io/sutyum/landlog/dash-fe .
 # Run
-$ docker run -p 8080:8080 -t land-ai/dash-fe
+$ docker run -p 3000:3000 -t gchr.io/sutyum/landlog/dash-fe
 ```

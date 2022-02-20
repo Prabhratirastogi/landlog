@@ -34,10 +34,10 @@ on:
 env:
   DOCKER_REGISTRY: ghcr.io
   AWS_REGION: ap-south-1 # set this to your preferred AWS region, e.g. us-west-1
-  GHCR_REPOSITORY: sutyum/land-ai/dash # set this to your Amazon ECR repository name
+  GHCR_REPOSITORY: sutyum/landlog/dash-fe # set this to your Amazon ECR repository name
   ECS_SERVICE: dash-fe-service # set this to your Amazon ECS service name
-  ECS_CLUSTER: land-ai-dash-fe # set this to your Amazon ECS cluster name
-  ECS_TASK_DEFINITION: .aws/ecs-task-definition.json
+  ECS_CLUSTER: landlog-dash-fe # set this to your Amazon ECS cluster name
+  ECS_TASK_DEFINITION: .aws/landlog-dash-fe.json
   # set this to the path to your Amazon ECS task definition
   # file, e.g. .aws/task-definition.json
   CONTAINER_NAME: dash-frontend
