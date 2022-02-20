@@ -33,7 +33,7 @@ on:
 
 env:
   AWS_REGION: ap-south-1                       # set this to your preferred AWS region, e.g. us-west-1
-  ECR_REPOSITORY: ghcr.io/sutyum/land-ai/dash  # set this to your Amazon ECR repository name
+  GHCR_REPOSITORY: sutyum/land-ai/dash  # set this to your Amazon ECR repository name
   ECS_SERVICE: dash-fe-service                 # set this to your Amazon ECS service name
   ECS_CLUSTER: land-ai-dash-fe                 # set this to your Amazon ECS cluster name
   ECS_TASK_DEFINITION: first-run-task-definition # set this to the path to your Amazon ECS task definition
@@ -50,6 +50,19 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
+    - name: Login to GitHub Container Registry
+      uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.GITHUB_REGISTRY_TOKEN }}
+    - name: Build and Push Docker Image
+      uses: docker/build-push-action@v2
+      with:
+        push: true # Will only build if this is not here
+        tags: |
+          ghcr.io/${{ GHCR_REPOSITORY }}:${{ github.ref }}
+          ghcr.io/${{ GHCR_REPOSITORY }}:latest
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
@@ -57,23 +70,7 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ env.AWS_REGION }}
-
-    - name: Login to Amazon ECR
-      id: login-ecr
-      uses: aws-actions/amazon-ecr-login@v1
-
-    - name: Build, tag, and push image to Amazon ECR
-      id: build-image
-      env:
-        IMAGE_TAG: ${{ github.sha }}
-      run: |
-        # Build a docker container and
-        # push it to ECR so that it can
-        # be deployed to ECS.
-        docker build -t $ECR_REPOSITORY:$IMAGE_TAG .
-        docker push $ECR_REPOSITORY:$IMAGE_TAG
-        echo "::set-output name=image::$ECR_REPOSITORY:$IMAGE_TAG"
-
+        
     - name: Fill in the new image ID in the Amazon ECS task definition
       id: task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
