@@ -66,7 +66,6 @@ jobs:
           tags: |
             ghcr.io/${{ env.GHCR_REPOSITORY }}:${{ github.sha }}
             ghcr.io/${{ env.GHCR_REPOSITORY }}:latest
-          run: echo "::set-output name=image::$DOCKER_REGISTRY/$GHCR_REPOSITORY:latest"
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -81,7 +80,7 @@ jobs:
           task-definition: ${{ env.ECS_TASK_DEFINITION }}
           #         container-name: ${{ env.CONTAINER_NAME }}
           container-name: ghcr.io/${{ env.GHCR_REPOSITORY }}
-          image: ${{ steps.build-image.outputs.image }}
+          image: $DOCKER_REGISTRY/$GHCR_REPOSITORY:latest
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
