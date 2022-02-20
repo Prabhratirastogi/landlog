@@ -80,7 +80,7 @@ jobs:
           task-definition: ${{ env.ECS_TASK_DEFINITION }}
           #         container-name: ${{ env.CONTAINER_NAME }}
           container-name: ghcr.io/${{ env.GHCR_REPOSITORY }}
-          image: $DOCKER_REGISTRY/$GHCR_REPOSITORY:latest
+          image: ${{ DOCKER_REGISTRY }}/${{ GHCR_REPOSITORY }}:latest
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
