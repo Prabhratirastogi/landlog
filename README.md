@@ -1,8 +1,5 @@
 # Dash Frontend
-
-[![Deploy to Amazon ECS](https://github.com/sutyum/SLAM/actions/workflows/aws.yml/badge.svg)](https://github.com/sutyum/SLAM/actions/workflows/aws.yml)
-
-[Temporary Deployment](https://land-ai.herokuapp.com)
+[Landlog](https://www.landlog.cc)
 
 # Build
 
