@@ -1,4 +1,5 @@
-import { Fragment, useState } from 'react'
+import { Fragment } from 'react'
+import Image from 'next/image';
 import { Menu, Popover, Transition } from '@headlessui/react'
 import { SearchIcon } from '@heroicons/react/solid'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
@@ -49,7 +50,7 @@ const NavBar: React.FC = () => {
                   <div className="flex-shrink-0 flex items-center">
                     <img
                       className="block h-8 w-auto"
-                      src={process.env.PUBLIC_URL + "/logo/logo192.png"}
+                      src="/logo/logo192.png"
                       alt="Workflow"
                     />
                   </div>
