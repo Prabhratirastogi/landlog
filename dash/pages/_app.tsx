@@ -3,7 +3,7 @@ import type { AppProps } from 'next/app'
 import Map from 'react-map-gl';
 import Login from '../Components/Login';
 import NavBar from '../Components/NavBar';
-import * as mapboxconf from '../mapbox.config';
+import * as mapboxconf from '../Components/mapbox.config';
 import { useStore } from '../store';
 
 function MyApp({ Component, pageProps }: AppProps) {
