@@ -1,13 +1,19 @@
 import React from 'react';
 import Map from 'react-map-gl';
+import Login from './Components/Login';
 import NavBar from './Components/NavBar';
 import * as mapboxconf from './mapbox.config';
+import { useStore } from './Components/store';
 
 const App: React.FC = () => {
+  const signedIn = useStore(state => state.signedIn);
+
   return (
     // TODO: NavBar: https://tailwindui.com/components/application-ui/navigation/navbars#component-ac4ed72c2e03976dc5415ce711fe2f78
     <div>
-      <NavBar />
+      { signedIn ? 
+      <>
+      <NavBar /> 
       <Map
       initialViewState={{
         longitude: 82.74,
@@ -18,6 +24,7 @@ const App: React.FC = () => {
       mapStyle={ mapboxconf.MapStyles.minimal }
       mapboxAccessToken={ mapboxconf.PublicAccessToken }
     />
+    </> : <Login /> }
     </div>
   )
 }
