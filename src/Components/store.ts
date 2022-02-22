@@ -4,6 +4,7 @@ import create from 'zustand';
 export interface UserState {
   signedIn: boolean,
   signIn: MouseEventHandler,
+  signOut: MouseEventHandler
 };
 
 export const useStore = create<UserState>(set => ({
