@@ -1,24 +1,13 @@
-FROM node:16
+FROM node:14.17-alpine
 
-# Create app directory
-WORKDIR /usr/src/app
+RUN mkdir -p /home/app/ && chown -R node:node /home/app
+WORKDIR /home/app
+COPY --chown=node:node . .
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-COPY package*.json ./
+USER node
 
-RUN npm install
-# If you are building your code for production
-# RUN npm ci --only=production
-
-RUN npm install -g serve
-
-# Bundle app source
-COPY . .
-RUN npm run build
+RUN yarn install --frozen-lockfile
+RUN yarn build
 
 EXPOSE 3000
-
-# CMD [ "npm", "run", "" ]
-CMD ["serve", "-s", "build"]
+CMD [ "yarn", "start" ]
