@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-// import Image from 'next/image'
+import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 
 const Home: NextPage = () => {
   return (
