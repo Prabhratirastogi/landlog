@@ -1,4 +1,4 @@
-import { Layout, Menu, Avatar, Badge, AutoComplete, Input, Dropdown } from 'antd';
+import { Layout, Menu, Avatar, Badge, AutoComplete, Input, Dropdown, Space, Divider } from 'antd';
 import Link from 'next/link';
 import CompleteSearch from './CompleteSearch';
 
@@ -14,7 +14,12 @@ const Footer: React.FC = () => {
 
 const usermenu = (
   <Menu>
-    <Menu.Item>
+    <Menu.Item key="3">
+      <Link href="/settings">
+        Settings
+      </Link>
+    </Menu.Item>
+    <Menu.Item key="2">
       <Link href="/signout">
         Sign Out
       </Link>
@@ -25,32 +30,31 @@ const usermenu = (
 const BaseLayout: React.FC = ({ children }) => {
   return (
     <Layout>
-      <Header className="header" style={{ background: 'white' }}>
-        <Menu theme="light" mode="horizontal" defaultSelectedKeys={['2']}>
-          <Menu.Item key="1">
-            <Link href="/">
-              Home
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="2">
-            <Link href="/about">
-              About
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="3">
-            <Link href="/settings">
-              Settings
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="4">
-            <Dropdown overlay={usermenu} placement="bottomLeft" className='my-1.5'>
-            <Badge count={5}>
-              <Avatar shape="square">U</Avatar>
-            </Badge>
-            </Dropdown>  
-          </Menu.Item>
+      <Header className="header shadow-sm" style={{ background: 'white' }}>
+        <Menu theme="light" mode="horizontal" defaultSelectedKeys={['']} className='flex flex-wrap '>
+          <Space align='start'>
+            <Menu.Item key="1">
+              <Link href="/">
+                Home
+              </Link>
+            </Menu.Item>            
+            <Menu.Item key="2">
+              <Link href="/about">
+                About
+              </Link>
+            </Menu.Item>
+          </Space>
+          <Space align="end">
+            <Divider type="vertical" />
+            <Menu.Item key="4">
+              <Dropdown overlay={usermenu} placement="bottomLeft" className='my-1.5'>
+                <Badge count={5}>
+                  <Avatar shape="square">U</Avatar>
+                </Badge>
+              </Dropdown>  
+            </Menu.Item>
+          </Space>
         </Menu>
-        <CompleteSearch />
       </Header>
 
       <Layout>
