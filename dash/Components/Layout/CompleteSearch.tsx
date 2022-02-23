@@ -1,6 +1,6 @@
 import { Input, AutoComplete } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-import { SearchIcon } from '@heroicons/react/solid'
+// import { SearchIcon } from '@heroicons/react/solid'
 
 const renderTitle = (title: string) => (
   <span>
@@ -48,14 +48,14 @@ const options = [
   },
 ];
 
-const Complete: React.FC = () => (
+const CompleteSearch: React.FC = () => (
   <AutoComplete
     dropdownClassName="certain-category-search-dropdown"
-    dropdownMatchSelectWidth={800}
+    dropdownMatchSelectWidth={600}
     options={options}
   >
-    <Input.Search size="large" placeholder="input here" className='w-50'/>
+    <Input.Search size="large" placeholder="search here" />
   </AutoComplete>
 );
 
-export default Complete;
+export default CompleteSearch;
