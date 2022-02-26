@@ -1,140 +1,53 @@
-import { Fragment } from 'react'
-import { Menu, Popover, Transition } from '@headlessui/react'
+import { Fragment, ReactNode } from "react";
+import { Menu, Transition } from "@headlessui/react";
+import { SearchIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
+import Link from "next/link";
+import Image from "next/image";
 
-import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
-import CompleteSearch from './CompleteSearch';
-
-const user = {
-  name: 'Sushma Kumari',
-  email: 'sushma@example.com',
-  imageUrl:
-    'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-}
-
-const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Calendar', href: '#', current: false },
-  { name: 'Teams', href: '#', current: false },
-  { name: 'Directory', href: '#', current: false },
-]
-
-const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: 'home' },
-]
-
-const classNames = (...classes: String[]) => {
+const classNames = (...classes: [string]) => {
   return classes.filter(Boolean).join(' ')
 }
 
-const NavBar: React.FC = () => {
+interface NavItemProps {
+  children: ReactNode;
+  link: string;
+};
 
+const NavItem: React.FC<NavItemProps> = ({ children, link }) => {
   return (
-    <>
-      {/* When the mobile menu is open, add `overflow-hidden` to the `body` element to prevent double scrollbars */}
-      <Popover
-        as="header"
-        className={({ open }) =>
-          classNames(
-            open ? 'fixed inset-0 z-40 overflow-y-auto' : '',
-            'bg-white lg:static lg:overflow-y-visible'
-          )
-        }
-      >
-        {({ open }) => (
-          <>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="relative flex justify-between xl:grid xl:grid-cols-12 lg:gap-8">
-                <div className="flex md:absolute md:left-0 md:inset-y-0 lg:static xl:col-span-2">
-                  <div className="flex-shrink-0 flex items-center">
-                    <img
-                      className="block h-8 w-auto"
-                      src="/logo/logo192.png"
-                      alt="Workflow"
-                    />
-                  </div>
-                </div>
-                <div className="min-w-600 flex-1 md:px-8 lg:px-0 xl:col-span-6">
-                  <div className="flex items-center px-6 py-3 md:max-w-3xl md:mx-auto lg:max-w-none lg:mx-0 xl:px-0">
-                    <div className="w-full">
-                      <CompleteSearch />
-                    </div>
-                  </div>
-                </div>
-                <div className="hidden lg:flex lg:items-center lg:justify-end xl:col-span-4">
-                  <a
-                    href="#"
-                    className="ml-5 flex-shrink-0 bg-white rounded-full p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
-                  >
-                    <span className="sr-only">View notifications</span>
-                    <BellIcon className="h-6 w-6" aria-hidden="true" />
-                  </a>
+    <li className="px-4 py-1 m-2 rounded-lg hover:bg-sky-100 focus:ring-2 ring-blue-600">
+      <Link href={link} passHref>
+        <div className="text-sky-600 flex">
+          {children}
+        </div>
+      </Link>
+    </li>
+  );
+}
 
-                  {/* Profile dropdown */}
-                  <Menu as="div" className="flex-shrink-0 relative ml-5">
-                    <div>
-                      <Menu.Button className="bg-white rounded-full flex focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">
-                        <span className="sr-only">Open user menu</span>
-                        <img className="h-8 w-8 rounded-full" src={user.imageUrl} alt="" />
-                      </Menu.Button>
-                    </div>
-                    <Transition
-                      as={Fragment}
-                      enter="transition ease-out duration-100"
-                      enterFrom="transform opacity-0 scale-95"
-                      enterTo="transform opacity-100 scale-100"
-                      leave="transition ease-in duration-75"
-                      leaveFrom="transform opacity-100 scale-100"
-                      leaveTo="transform opacity-0 scale-95"
-                    >
-                      <Menu.Items className="origin-top-right absolute z-10 right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 py-1 focus:outline-none">
-                        {userNavigation.map((item) => (
-                          <Menu.Item key={item.name}>
-                            {({ active }) => (
-                              <a
-                                href={item.href}
-                                className={classNames(
-                                  active ? 'bg-gray-100' : '',
-                                  'block py-2 px-4 text-sm text-gray-700'
-                                )}
-                              >
-                                {item.name}
-                              </a>
-                            )}
-                          </Menu.Item>
-                        ))}
-                      </Menu.Items>
-                    </Transition>
-                  </Menu>
+const NavBar: React.FC = () => {
+  return (
+    <ul className="flex bg-sky-50 px-2 pr-4 shadow-sm">
+      <NavItem link="/">
+        <Image src="/favicon.ico" alt="" width={20} height={20} />
+        <span className="pl-2">LandLog</span>
+        <span className="pl-2 text-slate-800">| Technoculture</span>
+      </NavItem>
+      <NavItem link="about">About</NavItem>
+      <NavItem link="settings">Settings</NavItem>
 
-                </div>
-              </div> 
-             
-            </div>
-
-            <Popover.Panel as="nav" className="lg:hidden" aria-label="Global">
-              <div className="max-w-3xl mx-auto px-2 pt-2 pb-3 space-y-1 sm:px-4">
-                {navigation.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    aria-current={item.current ? 'page' : undefined}
-                    className={classNames(
-                      item.current ? 'bg-gray-100 text-gray-900' : 'hover:bg-gray-50',
-                      'block rounded-md py-2 px-3 text-base font-medium'
-                    )}
-                  >
-                    {item.name}
-                  </a>
-                ))}
-              </div>
-            </Popover.Panel>
-          </>
-        )}
-      </Popover>
-    </>
-  )
+      <span className="grow" />
+      <div className="mx-4 place-self-center place-content-center relative flex">
+        <input className="pl-10 h-7 bg-blue-50 text-slate-500 placeholder:italic placeholder:font-normal placeholder:text-slate-300 focus:outline-none rounded-lg inset-2 caret-blue-400 focus:bg-sky-100" placeholder="Search..." name="search" type="text" />
+        <svg xmlns="http://www.w3.org/2000/svg" 
+          className="w-6 absolute left-0 place-self-center pl-2 ml-1 text-blue-400" 
+          fill="none" viewBox="0 0 24 24" stroke="currentColor"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+      </div>
+    </ul>
+  );
 }
 
 export default NavBar;

@@ -4,6 +4,7 @@ import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 import * as mapboxconf from '../Components/mapbox.config';
 import BaseLayout from '../Components/Layout/BaseLayout';
 import Map from 'react-map-gl';
+import { Content } from 'antd/lib/layout/layout';
 
 const Home: NextPage = () => {
   return (
@@ -14,16 +15,18 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
     <BaseLayout>
-    <Map
+    <Content>
+      <Map
       initialViewState={{
         longitude: 82.74,
         latitude: 24.78,
         zoom: 6.29
       }}
-      style={{width: "100vw", height: "100vh", top: 0, position: "absolute", zIndex: -10}}
+      style={{width: "100vw", height: "100vh", top: 0, position: "absolute", zIndex: -10, overflow: "hidden"}}
       mapStyle={ mapboxconf.MapStyles.minimal }
       mapboxAccessToken={ mapboxconf.PublicAccessToken }
     />
+      </Content> 
   </BaseLayout>
     </div>
   )
