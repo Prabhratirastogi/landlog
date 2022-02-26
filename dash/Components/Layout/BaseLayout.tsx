@@ -1,5 +1,3 @@
-import Link from 'next/link';
-import { Menu } from '@headlessui/react';
 import NavBar from './NavBar';
 
 const Footer: React.FC = () => {
