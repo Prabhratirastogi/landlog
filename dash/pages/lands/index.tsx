@@ -6,7 +6,7 @@ function About({ Component, pageProps }: AppProps) {
   return (
   <BaseLayout>
     <Head>
-      <title>LandLog | About</title>
+      <title>LandLog | Lands</title>
       <meta name="description" content="View all your land on a central dashboard." />
       <link rel="icon" href="/favicon.ico" />
     </Head>
