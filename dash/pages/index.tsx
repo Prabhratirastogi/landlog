@@ -5,6 +5,7 @@ import * as mapboxconf from '../Components/mapbox.config';
 import BaseLayout from '../Components/BaseLayout';
 import Map from 'react-map-gl';
 import { useStore } from '../store';
+import { Transition } from '@headlessui/react';
 
 const Home: NextPage = () => {
   const isDrawerOpen = useStore(state => state.isDrawerOpen);
@@ -28,9 +29,18 @@ const Home: NextPage = () => {
         mapStyle={ mapboxconf.MapStyles.minimal }
         mapboxAccessToken={ mapboxconf.PublicAccessToken }
         />
-        { isDrawerOpen && 
-          <div className='bg-blue-100/60 w-60 shadow-2xl backdrop-blur rounded-xl h-4/5 mt-14 m-2 p-4 ring-1 ring-blue-200'>dd</div>
-        }
+        <Transition 
+          show={isDrawerOpen} 
+          className="h-4/5"
+          enter="transition-transform duration-100 transform-gpu ease-out"
+          enterFrom='-translate-x-20'
+          enterTo='translate-x-0'
+          leave='transition-transform duration-100 transform-gpu ease-out'
+          leaveFrom='translate-x-0'
+          leaveTo='-translate-x-20'
+        >
+          <div className='bg-blue-100/60 w-60 h-full shadow-2xl backdrop-blur rounded-xl mt-14 m-2 p-4 ring-1 ring-blue-200'>dd</div>
+        </Transition>
       </div>
     </BaseLayout>
   )
