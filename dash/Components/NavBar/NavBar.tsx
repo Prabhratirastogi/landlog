@@ -1,29 +1,29 @@
-import { ReactNode } from "react";
-import Link from "next/link";
+import { MouseEventHandler, ReactNode } from "react";
+// import Link from "next/link";
 import Image from "next/image";
-
-const classNames = (...classes: [string]) => {
-  return classes.filter(Boolean).join(' ')
-}
+import { useStore } from "../../store";
+// import { classNames } from '../../utilities/classNmes';
 
 interface NavItemProps {
   children: ReactNode;
-  link: string;
+  onclick?: MouseEventHandler;
 };
 
-const NavItem: React.FC<NavItemProps> = ({ children, link }) => {
+const NavItem: React.FC<NavItemProps> = ({ children, onclick }) => {
+  const [toggleDrawer, isDrawerOpen] = useStore(state => [state.toggleDrawer, state.isDrawerOpen]);
+
   return (
-    <li className="px-4 py-1 m-2 rounded-lg hover:bg-sky-200 cursor-default hover:shadow-inner hover:transition-colors transition duration-50 delay-100 ease-out">
-      <Link href={link} passHref>
-        <div className="text-sky-600 flex">
+    <li className="px-4 py-1 m-2 rounded-lg hover:bg-sky-200 cursor-default hover:shadow-inner hover:transition-colors transition duration-50 ease-in">
+        <div className="text-sky-600 flex" onClick={ toggleDrawer }>
           {children}
         </div>
-      </Link>
     </li>
   );
 }
 
 const NavBar: React.FC = () => {
+  // const isDrawerOpen = useStore(state => state.isDrawerOpen);
+
   return (
     <ul className="flex bg-blue-100/60 px-2 pr-4 border-b-2 border-blue-100 backdrop-blur shadow-2xl">
       <NavItem link="/">
@@ -31,7 +31,7 @@ const NavBar: React.FC = () => {
         <span className="pl-2">LandLog</span>
         <span className="pl-2 text-slate-800">| Technoculture</span>
       </NavItem>
-      <NavItem link="lands">
+      <NavItem link="lands" >
         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 place-self-center" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
         </svg> 

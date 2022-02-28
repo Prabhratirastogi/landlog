@@ -1,6 +1,6 @@
 import type { AppProps } from 'next/app'
 import { DatePicker, Card, Space } from 'antd';
-import BaseLayout from '../../Components/Layout/BaseLayout';
+import BaseLayout from '../../Components/BaseLayout';
 import Head from 'next/head';
 
 function Settings({ Component, pageProps }: AppProps) {  
