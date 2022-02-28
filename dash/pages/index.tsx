@@ -32,10 +32,10 @@ const Home: NextPage = () => {
         <Transition 
           show={isDrawerOpen} 
           className="h-4/5"
-          enter="transition-transform duration-100 transform-gpu ease-out"
+          enter="transition-transform duration-50 transform-gpu ease-out"
           enterFrom='-translate-x-20'
           enterTo='translate-x-0'
-          leave='transition-transform duration-100 transform-gpu ease-out'
+          leave='transition-transform duration-50 transform-gpu ease-out'
           leaveFrom='translate-x-0'
           leaveTo='-translate-x-20'
         >
