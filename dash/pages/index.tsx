@@ -39,7 +39,21 @@ const Home: NextPage = () => {
           leaveFrom='translate-x-0'
           leaveTo='-translate-x-20'
         >
-          <div className='bg-blue-100/60 w-60 h-full shadow-2xl backdrop-blur rounded-xl mt-14 m-2 p-4 ring-1 ring-blue-200'>dd</div>
+          <div className='bg-blue-100/60 w-60 h-full shadow-2xl backdrop-blur rounded-xl mt-14 m-2 ring-1 ring-blue-200 overflow-x-hidden overflow-y-scroll'>
+          <div className='flex p-4 bg-slate-100/50'>
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-slate-400 place-self-center mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <div className='flex flex-col flex-grow'>
+              <span className='capitalize text-sky-500'>sambodhi retreat</span>
+              <span className='capitalize text-xs text-slate-400'>gaya, bihar</span>
+            </div>
+            <div className='place-self-center text-sky-300 bg-slate-200 rounded-xl p-2'>
+              16
+            </div>
+          </div>
+        </div>
         </Transition>
       </div>
     </BaseLayout>
