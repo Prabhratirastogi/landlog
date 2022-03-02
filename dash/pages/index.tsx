@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 import * as mapboxconf from '../Components/mapbox.config';
 import BaseLayout from '../Components/BaseLayout';
 import Map from 'react-map-gl';

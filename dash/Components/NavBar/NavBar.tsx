@@ -37,7 +37,7 @@ const NavBar: React.FC = () => {
         <span className="pl-2">Lands</span>
       </NavItem>
 
-      <NavItem onclick={ () => router.push("/settings") } >
+      <NavItem onclick={ () => router.push("/dashboard") } >
         <Image src="/favicon.ico" alt="" width={20} height={20} />
         <span className="pl-2">LandLog</span>
         <span className="pl-2 text-slate-800">| Technoculture</span>

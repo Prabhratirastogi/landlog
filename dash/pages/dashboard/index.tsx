@@ -3,11 +3,11 @@ import { DatePicker, Card, Space } from 'antd';
 import BaseLayout from '../../Components/BaseLayout';
 import Head from 'next/head';
 
-function Settings({ Component, pageProps }: AppProps) {  
+function Dashboard({ Component, pageProps }: AppProps) {  
   return (
   <BaseLayout>
     <Head>
-      <title>LandLog | Settings</title>
+      <title>LandLog | Dashboard</title>
       <meta name="description" content="View all your land on a central dashboard." />
       <link rel="icon" href="/favicon.ico" />
     </Head>
@@ -26,4 +26,4 @@ function Settings({ Component, pageProps }: AppProps) {
   );
 }
 
-export default Settings;
+export default Dashboard;
