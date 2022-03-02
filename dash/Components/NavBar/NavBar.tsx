@@ -2,7 +2,7 @@ import { MouseEventHandler, ReactNode } from "react";
 import Image from "next/image";
 import { useStore } from "../../store";
 import { classNames } from '../../utilities/classNames';
-import {Router, useRouter} from 'next/router';
+import { useRouter} from 'next/router';
 
 interface NavItemProps {
   children: ReactNode;
