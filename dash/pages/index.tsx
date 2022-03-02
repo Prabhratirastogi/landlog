@@ -55,35 +55,35 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className='flex h-96 w-full'>
       <Transition 
         show={isDrawerOpen} 
-        className="ring-1 ring-blue-200 w-64 h-full m-2 rounded-2xl shadow-2xl"
-        enter="transition-transform duration-50 transform-gpu ease-out"
-        enterFrom='-translate-x-20'
-        enterTo='translate-x-0'
-        leave='transition-transform duration-50 transform-gpu ease-in'
-        leaveFrom='translate-x-0'
-        leaveTo='-translate-x-20'
+        className="w-full h-96 my-2 mx-4 rounded-2xl flex"
+        enter="transition-transform transform-gpu ease-out"
+        enterFrom='-translate-y-3'
+        enterTo='transalte-y-0'
+        leave='transition-transform transform-gpu ease-out'
+        leaveFrom='translate-y-0'
+        leaveTo='-translate-y-3'
       >
-      <div className='w-full h-full overflow-y-scroll overflow-x-hidden rounded-2xl cursor-default'>
-        <FilterPane />
-        <div className='bg-blue-100 divide-y divide-blue-200'>
-          { lands.map(
-            (land, index) => (
-              <LandItem 
-                name={land.name} 
-                location={ {city: land.location.city, state: land.location.state } } 
-                count={land.count}
-                key={index}
-              /> 
-          ))
-          }
+        <div className='h-full w-64 rounded-2xl cursor-default overflow-x-hidden ring-1 ring-blue-200 shadow-2xl'>
+          <FilterPane />
+          <div className='w-64 h-full overflow-y-scroll'>
+            <div className='bg-blue-100 divide-y divide-blue-200'>
+              { lands.map(
+                (land, index) => (
+                  <LandItem 
+                    name={land.name} 
+                    location={ {city: land.location.city, state: land.location.state } } 
+                    count={land.count}
+                    key={index}
+                  /> 
+              ))
+              }
+            </div>
+          </div>
         </div>
-      </div>
+        <LandDetails />
       </Transition>
-      <LandDetails />
-      </div>
     </BaseLayout>
     </>
   )
