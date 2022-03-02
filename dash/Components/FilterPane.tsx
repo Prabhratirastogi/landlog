@@ -14,17 +14,16 @@ export const state_names = {
 
 export type SelectableTagProps ={
   filter: states_type;
-  active?: boolean;
 };
 
-export const SelectableTag = ({filter, active }: SelectableTagProps) => {
+export const SelectableTag = ({filter}: SelectableTagProps) => {
   const [stateFilter, setStateFilter] = useStore(state => [state.stateFilter, state.setStateFilter]);
 
   return (
   <>
     <span className={classNames(
-        stateFilter == filter ? "bg-sky-300 shadow-inner ring-sky-400/40" : "ring-sky-300/40" ,
-        'px-3 py-1 m-1 rounded-xl ring-1 hover:bg-sky-300 text-sky-600 cursor-default')}
+        stateFilter == filter ? "bg-blue-300 shadow-inner ring-sky-400/40" : "ring-sky-300/40" ,
+        'px-3 py-1 m-1 rounded-xl ring-1 hover:bg-blue-300/50 text-sky-600 cursor-default hover:transition-colors transition duration-50 ease-in')}
         onClick={(e) => setStateFilter(filter)}
         >
         {state_names[filter]}

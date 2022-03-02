@@ -10,6 +10,7 @@ import { LandInfo, LandItem } from '../Components/LandItem';
 import { classNames } from '../utilities/classNames';
 import { useState } from 'react';
 import { FilterPane, states_type } from '../Components/FilterPane';
+import { LandDetails } from '../Components/LandDetails';
 
 const lands: LandInfo[] = [
   { name: "sambodhi retreat", location: { city: "patna", state: "bihar" }, count: 33 },
@@ -54,9 +55,10 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <div className='flex h-96 w-full'>
       <Transition 
         show={isDrawerOpen} 
-        className="ring-1 ring-blue-200 w-64 h-96 m-2 rounded-2xl shadow-2xl"
+        className="ring-1 ring-blue-200 w-64 h-full m-2 rounded-2xl shadow-2xl"
         enter="transition-transform duration-50 transform-gpu ease-out"
         enterFrom='-translate-x-20'
         enterTo='translate-x-0'
@@ -80,6 +82,8 @@ const Home: NextPage = () => {
         </div>
       </div>
       </Transition>
+      <LandDetails />
+      </div>
     </BaseLayout>
     </>
   )
