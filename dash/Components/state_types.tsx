@@ -1,1 +1,0 @@
-export type states_type = 'all' | 'bh' | 'jh' | 'wb' | 'up' | 'od';

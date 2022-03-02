@@ -1,7 +1,8 @@
 import { MouseEventHandler } from 'react';
 import create from 'zustand';
 import { persist } from "zustand/middleware"
-import { states_type } from './Components/state_types';
+
+export type states_type = 'all' | 'bh' | 'jh' | 'wb' | 'up' | 'od';
 
 export interface UserState {
   isDrawerOpen: boolean,
