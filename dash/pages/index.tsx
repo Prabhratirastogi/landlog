@@ -12,28 +12,38 @@ import { FilterPane, states_type } from '../Components/FilterPane';
 import { LandDetails } from '../Components/LandDetails';
 
 const lands: LandInfo[] = [
-  { name: "sambodhi retreat", location: { city: "patna", state: "bihar" }, count: 33 },
-  { name: "branch 1", location: { city: "gaya", state: "bihar" }, count: 1 },
-  { name: "branch 2", location: { city: "gaya", state: "bihar" }, count: 23 },
-  { name: "branch 3", location: { city: "gaya", state: "bihar" }, count: 65 },
-  { name: "branch 1", location: { city: "patna", state: "bihar" }, count: 92 },
-  { name: "branch 2", location: { city: "patna", state: "bihar" }, count: 8 },
-  { name: "branch 3", location: { city: "patna", state: "bihar" }, count: 1 },  
-  { name: "branch 1", location: { city: "patna", state: "bihar" }, count: 92 },
-  { name: "branch 2", location: { city: "patna", state: "bihar" }, count: 8 },
-  { name: "branch 3", location: { city: "patna", state: "bihar" }, count: 1 },  
-  { name: "branch 3", location: { city: "gaya", state: "bihar" }, count: 65 },
-  { name: "branch 1", location: { city: "patna", state: "bihar" }, count: 92 },
-  { name: "branch 2", location: { city: "patna", state: "bihar" }, count: 8 },
-  { name: "branch 3", location: { city: "patna", state: "bihar" }, count: 1 },  
-  { name: "branch 1", location: { city: "patna", state: "bihar" }, count: 92 },
-  { name: "branch 2", location: { city: "patna", state: "bihar" }, count: 8 },
-  { name: "branch 3", location: { city: "patna", state: "bihar" }, count: 1 },
+  { id:  1, name: "sambodhi retreat", location: { city: "patna", state: "bihar" }, count: 33 },
+  { id:  2, name: "branch 1", location: { city: "gaya", state: "bihar" }, count: 1 },
+  { id:  3, name: "branch 2", location: { city: "gaya", state: "bihar" }, count: 23 },
+  { id:  4, name: "branch 3", location: { city: "gaya", state: "bihar" }, count: 65 },
+  { id:  5, name: "branch 1", location: { city: "patna", state: "bihar" }, count: 92 },
+  { id:  6, name: "branch 2", location: { city: "patna", state: "bihar" }, count: 8 },
+  { id:  7, name: "branch 3", location: { city: "patna", state: "bihar" }, count: 1 },  
+  { id:  8, name: "branch 1", location: { city: "patna", state: "bihar" }, count: 92 },
+  { id:  9, name: "branch 2", location: { city: "patna", state: "bihar" }, count: 8 },
+  { id: 10, name: "branch 3", location: { city: "patna", state: "bihar" }, count: 1 },  
+  { id: 11, name: "branch 3", location: { city: "gaya", state: "bihar" }, count: 65 },
+  { id: 12, name: "branch 1", location: { city: "patna", state: "bihar" }, count: 92 },
+  { id: 13, name: "branch 2", location: { city: "patna", state: "bihar" }, count: 8 },
+  { id: 14, name: "branch 3", location: { city: "patna", state: "bihar" }, count: 1 },  
+  { id: 15, name: "branch 1", location: { city: "patna", state: "bihar" }, count: 92 },
+  { id: 16, name: "branch 2", location: { city: "patna", state: "bihar" }, count: 8 },
+  { id: 17, name: "branch 3", location: { city: "patna", state: "bihar" }, count: 1 },
 ].sort((a, b) => b.count - a.count);
+
+const useActiveSelection = () => {
+  const [active, setActive] = useState<number | null>(null);
+
+  const setSelection = (selection: number) => {
+    selection == active ? setActive(null) : setActive(selection);
+  }
+
+  return [active, setSelection];
+}
 
 const Home: NextPage = () => {
   const isDrawerOpen = useStore(state => state.isDrawerOpen);
-  const [filter, useFilter] = useState<states_type>('all');
+  const [active, setSelection] = useActiveSelection();
 
   return (
     <>
@@ -75,6 +85,8 @@ const Home: NextPage = () => {
                     location={ {city: land.location.city, state: land.location.state } } 
                     count={land.count}
                     key={index}
+                    active={active == index}
+                    onclick={() => setSelection(index)}
                   /> 
               ))
               }

@@ -9,6 +9,8 @@ export interface UserState {
   toggleDrawer: MouseEventHandler,
   stateFilter: states_type,
   setStateFilter: (filter: states_type) => any
+  isDetailsOpen: boolean,
+  toggleDetails: () => any
 };
 
 export const useStore = create<UserState>(persist(
@@ -20,6 +22,8 @@ export const useStore = create<UserState>(persist(
     set(state => ({ 
       stateFilter: filter 
     })),
+  isDetailsOpen: false,
+  toggleDetails: () => set(state => ({ isDetailsOpen: !state.isDetailsOpen }))
 }),
   {
     name: "landlog-store",
