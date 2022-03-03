@@ -6,8 +6,6 @@ import Map from 'react-map-gl';
 import { useStore } from '../store';
 import { Transition } from '@headlessui/react';
 import { LandInfo, LandItem } from '../Components/LandItem';
-import { classNames } from '../utilities/classNames';
-import { useState } from 'react';
 import { FilterPane, states_type } from '../Components/FilterPane';
 import { LandDetails } from '../Components/LandDetails';
 import { useActiveSelection } from '../utilities/useActiveSelection';
@@ -34,7 +32,7 @@ const lands: LandInfo[] = [
 
 const Home: NextPage = () => {
   const isDrawerOpen = useStore(state => state.isDrawerOpen);
-  const [active, setSelection] = useActiveSelection();
+  const {active, setSelection} = useActiveSelection();
 
   return (
     <>
@@ -72,12 +70,9 @@ const Home: NextPage = () => {
               { lands.map(
                 (land, index) => (
                   <LandItem 
-                    name={land.name} 
-                    location={ {city: land.location.city, state: land.location.state } } 
-                    count={land.count}
                     key={index}
-                    active={active == index}
-                    onclick={() => setSelection(index)}
+                    info={{ name: land.name, location: {city: land.location.city, state: land.location.state }, count: land.count, active: (active == index)}}
+                    onclick={ e => setSelection(index) }
                   /> 
               ))
               }
@@ -86,7 +81,7 @@ const Home: NextPage = () => {
         </div>
         {
           <Transition
-            show={active !== null}
+            show={active > -1}
             // className="-z-10"
             enter="transition-transform transform-gpu ease-out"
             enterFrom='-translate-x-2'
