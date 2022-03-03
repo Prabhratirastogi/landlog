@@ -84,7 +84,20 @@ const Home: NextPage = () => {
             </div>
           </div>
         </div>
-        <LandDetails />
+        {
+          <Transition
+            show={active !== null}
+            // className="-z-10"
+            enter="transition-transform transform-gpu ease-out"
+            enterFrom='-translate-x-2'
+            enterTo='translate-x-0'
+            leave='transition-transform transform-gpu ease-out'
+            leaveFrom='translate-x-0'
+            leaveTo='-translate-x-2'
+            >
+            <LandDetails />
+          </Transition>
+        }
       </Transition>
     </BaseLayout>
     </>
