@@ -10,6 +10,7 @@ import { classNames } from '../utilities/classNames';
 import { useState } from 'react';
 import { FilterPane, states_type } from '../Components/FilterPane';
 import { LandDetails } from '../Components/LandDetails';
+import { useActiveSelection } from '../utilities/useActiveSelection';
 
 const lands: LandInfo[] = [
   { id:  1, name: "sambodhi retreat", location: { city: "patna", state: "bihar" }, count: 33 },
@@ -30,16 +31,6 @@ const lands: LandInfo[] = [
   { id: 16, name: "branch 2", location: { city: "patna", state: "bihar" }, count: 8 },
   { id: 17, name: "branch 3", location: { city: "patna", state: "bihar" }, count: 1 },
 ].sort((a, b) => b.count - a.count);
-
-const useActiveSelection = () => {
-  const [active, setActive] = useState<number | null>(null);
-
-  const setSelection = (selection: number) => {
-    selection == active ? setActive(null) : setActive(selection);
-  }
-
-  return [active, setSelection];
-}
 
 const Home: NextPage = () => {
   const isDrawerOpen = useStore(state => state.isDrawerOpen);
