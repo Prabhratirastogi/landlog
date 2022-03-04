@@ -1,1 +1,9 @@
 .DS_Store
+
+yarn.lock
+.turbo
+node_modules
+
+build/
+dist/
+.next/
