@@ -15,11 +15,11 @@ export interface UserState {
 
 let store: any = (set: any) => ({
     isDrawerOpen: true,
-    toggleDrawer: () => set(state => ({ isDrawerOpen: !state.isDrawerOpen })),
+    toggleDrawer: () => set((state: UserState) => ({ isDrawerOpen: !state.isDrawerOpen })),
     stateFilter: 'all',
-    setStateFilter: (filter: states_type) => set(state => ({stateFilter: filter})),
+    setStateFilter: (filter: states_type) => set((state: UserState) => ({stateFilter: filter})),
     isDetailsOpen: false,
-    toggleDetails: () => set(state => ({ isDetailsOpen: !state.isDetailsOpen }))
+    toggleDetails: () => set((state: UserState) => ({ isDetailsOpen: !state.isDetailsOpen }))
   });
 
 store = devtools(store);
