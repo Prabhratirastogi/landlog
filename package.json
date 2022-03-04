@@ -1,6 +1,7 @@
 {
   "name": "vv-plus",
   "private": true,
+  "packageManager": "yarn@1.22.17",
   "devDependencies": {
     "turbo": "^1.1.5",
     "@testing-library/jest-dom": "^5.16.1",
