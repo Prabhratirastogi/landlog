@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import * as mapboxconf from '../Components/mapbox.config';
+import 'mapbox-gl/dist/mapbox-gl.css';
 import BaseLayout from '../Components/BaseLayout';
 import Map from 'react-map-gl';
 import { useStore } from '../store';
@@ -42,7 +43,7 @@ const Home: NextPage = () => {
         latitude: 24.78,
         zoom: 6.29
       }}
-      style={{ top: 0, position: "absolute", zIndex: -10, overflow: "hidden" }}
+      style={{ top: (isDrawerOpen ? 450 : 0), position: "absolute", zIndex: 0, overflow: "hidden" }}
       mapStyle={ mapboxconf.MapStyles.minimal }
       mapboxAccessToken={ mapboxconf.PublicAccessToken }
     />
@@ -82,7 +83,6 @@ const Home: NextPage = () => {
         {
           <Transition
             show={active > -1}
-            // className="-z-10"
             enter="transition-transform transform-gpu ease-out"
             enterFrom='-translate-x-2'
             enterTo='translate-x-0'

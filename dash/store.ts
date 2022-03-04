@@ -1,6 +1,6 @@
 import { MouseEventHandler } from 'react';
 import create from 'zustand';
-import { persist } from "zustand/middleware"
+import { persist , devtools } from "zustand/middleware"
 
 export type states_type = 'all' | 'bh' | 'jh' | 'wb' | 'up' | 'od';
 
@@ -13,21 +13,21 @@ export interface UserState {
   toggleDetails: () => any
 };
 
-export const useStore = create<UserState>(persist(
-  (set, get) => ({
-  isDrawerOpen: false,
-  toggleDrawer: () => set(state => ({ isDrawerOpen: !state.isDrawerOpen })),
-  stateFilter: 'all',
-  setStateFilter: (filter: states_type) => 
-    set(state => ({ 
-      stateFilter: filter 
-    })),
-  isDetailsOpen: false,
-  toggleDetails: () => set(state => ({ isDetailsOpen: !state.isDetailsOpen }))
-}),
-  {
+let store: any = (set: any) => ({
+    isDrawerOpen: true,
+    toggleDrawer: () => set(state => ({ isDrawerOpen: !state.isDrawerOpen })),
+    stateFilter: 'all',
+    setStateFilter: (filter: states_type) => set(state => ({stateFilter: filter})),
+    isDetailsOpen: false,
+    toggleDetails: () => set(state => ({ isDetailsOpen: !state.isDetailsOpen }))
+  });
+
+store = devtools(store);
+
+export const useStore = create<UserState>(
+  persist(store, {
     name: "landlog-store",
-    getStorage: () => localStorage,
-    version: 1
-  }
-));
+    getStorage: () => localStorage  
+  })
+  // store
+  );
