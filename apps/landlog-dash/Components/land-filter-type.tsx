@@ -1,5 +1,5 @@
 export type option = {
-  id: number,
-  name: string,
-  filter: string
+  id: number;
+  name: string;
+  filter: string;
 };

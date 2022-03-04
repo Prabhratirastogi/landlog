@@ -1,4 +1,4 @@
-export type land_status = "pending" | "problematic" | "ok";
+export type land_status = 'pending' | 'problematic' | 'ok';
 
 export interface LandDetailItemProps {
   id: number;
@@ -8,5 +8,5 @@ export interface LandDetailItemProps {
   count: {
     done: number;
     total: number;
-  }
-};
+  };
+}
