@@ -14,7 +14,7 @@ const BaseLayout: React.FC = ({ children }) => {
   return (
     <div className="w-screen h-screen overflow-hidden">
       <NavBar />
-      <div>{children}</div>
+      <div className="z-100 absolute">{children}</div>
       <Footer />
     </div>
   );

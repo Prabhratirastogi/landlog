@@ -129,7 +129,7 @@ const Home: NextPage = () => {
           zoom: 6.29,
         }}
         style={{
-          top: isDrawerOpen ? 450 : 0,
+          top: 0,
           position: 'absolute',
           zIndex: 0,
           overflow: 'hidden',

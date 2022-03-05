@@ -1,5 +1,5 @@
 import type { AppProps } from 'next/app';
-import { DatePicker, Card, Space } from 'antd';
+import { Card, Space } from 'antd';
 import BaseLayout from '../../component/BaseLayout';
 import Head from 'next/head';
 import { Button } from 'ui';

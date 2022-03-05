@@ -3,7 +3,12 @@ import { classNames } from '../utilities/classNames';
 
 export type states_type = 'all' | 'bh' | 'jh' | 'wb' | 'up' | 'od';
 
-export const state_names = {
+// type state_name = {
+//   name: string;
+//   short: string;
+// };
+
+export const state_names: Record<states_type, string> = {
   all: 'All',
   bh: 'Bihar',
   jh: 'Jharkhand',
@@ -40,13 +45,13 @@ export const SelectableTag = ({ filter }: SelectableTagProps) => {
 };
 
 export const FilterPane = () => {
+  const names = Object.keys(state_names) as states_type[];
+
   return (
     <div className="flex flex-row flex-wrap p-2 bg-sky-200 shadow-inner">
-      <SelectableTag filter="all" />
-      <SelectableTag filter="bh" />
-      <SelectableTag filter="jh" />
-      <SelectableTag filter="wb" />
-      <SelectableTag filter="od" />
+      {names.map((state_key, index) => (
+        <SelectableTag filter={state_key} key={index} />
+      ))}
     </div>
   );
 };
