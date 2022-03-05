@@ -10,6 +10,7 @@ import { LandInfo, LandItem } from '../Components/LandItem';
 import { FilterPane, states_type } from '../Components/FilterPane';
 import { LandDetails } from '../Components/LandDetails';
 import { useActiveSelection } from '../utilities/useActiveSelection';
+import { Button } from "ui";
 
 const lands: LandInfo[] = [
   {
@@ -156,6 +157,7 @@ const Home: NextPage = () => {
         >
           <div className="h-full w-64 rounded-2xl cursor-default overflow-x-hidden ring-1 ring-blue-200 shadow-2xl">
             <FilterPane />
+            <Button />
             <div className="w-64 h-full overflow-y-scroll">
               <div className="bg-blue-100 divide-y divide-blue-200">
                 {lands.map((land, index) => (

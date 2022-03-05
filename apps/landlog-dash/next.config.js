@@ -1,10 +1,7 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-};
 
-module.exports = {
-  nextConfig, images: {
-    domains: ['images.unsplash.com'],
-  }
-};
+const withTM = require('next-transpile-modules')(['ui']);
+
+module.exports = withTM({
+  reactStrictMode: true,
+});
