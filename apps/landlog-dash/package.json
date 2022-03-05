@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "clean:bash": "rm -rf ./node_modules && rm ./yarn.lock"
   },
   "dependencies": {
     "@badrap/bar-of-progress": "^0.1.2",
