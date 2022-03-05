@@ -1,5 +1,5 @@
 import type { AppProps } from 'next/app';
-import BaseLayout from '../../Components/BaseLayout';
+import BaseLayout from '../../components/BaseLayout';
 import Head from 'next/head';
 
 function About({ Component, pageProps }: AppProps) {
