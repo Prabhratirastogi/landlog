@@ -2,6 +2,7 @@ import type { AppProps } from 'next/app';
 import { DatePicker, Card, Space } from 'antd';
 import BaseLayout from '../../Components/BaseLayout';
 import Head from 'next/head';
+import { Button } from 'ui';
 
 function Dashboard({ Component, pageProps }: AppProps) {
   return (
@@ -15,7 +16,7 @@ function Dashboard({ Component, pageProps }: AppProps) {
       <Space direction="horizontal">
         <Card title="Card" style={{ width: 300 }}>
           <p>Card content</p>
-          <p>Card content</p>
+          <Button />
         </Card>
         <Card title="Card" style={{ width: 300 }}>
           <p>Card content</p>
