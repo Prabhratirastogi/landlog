@@ -2,7 +2,7 @@ import { LandInfo, LandItem } from './LandItem';
 import { FilterPane } from './FilterPane';
 import { LandDetails } from './LandDetails';
 import { Transition } from '@headlessui/react';
-import { useActiveSelection } from '../../utilities/useActiveSelection';
+import { useActiveSelection } from 'utils/useActiveSelection';
 
 const lands: LandInfo[] = [
   {

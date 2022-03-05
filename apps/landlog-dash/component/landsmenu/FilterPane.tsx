@@ -1,13 +1,7 @@
 import { useStore } from '../../store';
-import { classNames } from '../../utilities/classNames';
+import { classNames } from 'utils/classNames';
 
 export type states_type = 'all' | 'bh' | 'jh' | 'wb' | 'up' | 'od';
-
-// type state_name = {
-//   name: string;
-//   short: string;
-// };
-
 export const state_names: Record<states_type, string> = {
   all: 'All',
   bh: 'Bihar',
