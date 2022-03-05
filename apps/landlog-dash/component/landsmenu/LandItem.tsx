@@ -1,5 +1,5 @@
 import { MouseEventHandler } from 'react';
-import { classNames } from '../utilities/classNames';
+import { classNames } from '../../utilities/classNames';
 
 export interface LandInfo {
   name: string;

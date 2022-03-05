@@ -1,5 +1,5 @@
 import { LandDetailItemProps } from './land-detail-types';
-import { classNames } from '../utilities/classNames';
+import { classNames } from '../../utilities/classNames';
 
 const LandDetailItem: React.FC<LandDetailItemProps> = ({ ...props }) => {
   const percentage_left: number = Math.round((props.count.done / props.count.total) * 100);

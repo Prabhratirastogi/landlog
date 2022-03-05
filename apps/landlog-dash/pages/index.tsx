@@ -1,14 +1,15 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import { Transition } from '@headlessui/react';
+import Map from 'react-map-gl';
 import * as mapboxconf from '../component/mapbox.config';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import BaseLayout from '../component/BaseLayout';
-import Map from 'react-map-gl';
+
 import { useStore } from '../store';
-import { Transition } from '@headlessui/react';
-import { LandInfo, LandItem } from '../component/LandItem';
-import { FilterPane, states_type } from '../component/FilterPane';
-import { LandDetails } from '../component/LandDetails';
+import BaseLayout from '../component/navbar/BaseLayout';
+import { LandInfo, LandItem } from '../component/landsmenu/LandItem';
+import { FilterPane } from '../component/landsmenu/FilterPane';
+import { LandDetails } from '../component/landsmenu/LandDetails';
 import { useActiveSelection } from '../utilities/useActiveSelection';
 
 const lands: LandInfo[] = [
@@ -122,7 +123,7 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <Map
+      {/* <Map
         initialViewState={{
           longitude: 82.74,
           latitude: 24.78,
@@ -136,7 +137,7 @@ const Home: NextPage = () => {
         }}
         mapStyle={mapboxconf.MapStyles.minimal}
         mapboxAccessToken={mapboxconf.PublicAccessToken}
-      />
+      /> */}
       <BaseLayout>
         <Head>
           <title>LandLog | Home</title>
@@ -144,6 +145,7 @@ const Home: NextPage = () => {
           <link rel="icon" href="/favicon.ico" />
         </Head>
 
+{ 
         <Transition
           show={isDrawerOpen}
           className="w-full h-96 my-2 mx-4 rounded-2xl flex"
@@ -190,6 +192,7 @@ const Home: NextPage = () => {
             </Transition>
           }
         </Transition>
+        }
       </BaseLayout>
     </>
   );

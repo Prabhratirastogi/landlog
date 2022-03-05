@@ -1,5 +1,5 @@
-import { useStore } from '../store';
-import { classNames } from '../utilities/classNames';
+import { useStore } from '../../store';
+import { classNames } from '../../utilities/classNames';
 
 export type states_type = 'all' | 'bh' | 'jh' | 'wb' | 'up' | 'od';
 
