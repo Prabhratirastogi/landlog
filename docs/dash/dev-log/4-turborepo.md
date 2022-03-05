@@ -6,3 +6,7 @@
 # add a husky git hook
 yarn husky add .husky/pre-commit "yarn run test && yarn run format && yarn run lint-staged"
 ```
+
+- https://github.com/vercel/next.js/issues/31325
+- https://stackoverflow.com/questions/70635365/how-to-transpile-node-modules-with-turborepo-and-swc
+- 

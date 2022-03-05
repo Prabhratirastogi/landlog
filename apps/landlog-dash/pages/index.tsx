@@ -1,14 +1,14 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import * as mapboxconf from '../components/mapbox.config';
+import * as mapboxconf from '../component/mapbox.config';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import BaseLayout from '../components/BaseLayout';
+import BaseLayout from '../component/BaseLayout';
 import Map from 'react-map-gl';
 import { useStore } from '../store';
 import { Transition } from '@headlessui/react';
-import { LandInfo, LandItem } from '../components/LandItem';
-import { FilterPane, states_type } from '../components/FilterPane';
-import { LandDetails } from '../components/LandDetails';
+import { LandInfo, LandItem } from '../component/LandItem';
+import { FilterPane, states_type } from '../component/FilterPane';
+import { LandDetails } from '../component/LandDetails';
 import { useActiveSelection } from '../utilities/useActiveSelection';
 
 const lands: LandInfo[] = [
