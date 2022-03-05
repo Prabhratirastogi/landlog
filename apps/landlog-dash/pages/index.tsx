@@ -10,7 +10,7 @@ import { LandInfo, LandItem } from '../Components/LandItem';
 import { FilterPane, states_type } from '../Components/FilterPane';
 import { LandDetails } from '../Components/LandDetails';
 import { useActiveSelection } from '../utilities/useActiveSelection';
-import { Button } from "ui";
+import { Button } from 'ui';
 
 const lands: LandInfo[] = [
   {

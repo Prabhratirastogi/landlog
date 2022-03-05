@@ -41,5 +41,10 @@
     "*.json": [
       "prettier --write"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn run format && yarn run test"
+    }
   }
 }
