@@ -3,7 +3,6 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { classNames } from 'utils/classNames';
 import { useStore } from '../../store';
-import { Disclosure, Menu, Transition } from '@headlessui/react';
 
 const navItemData: NavItemProps[] = [{}];
 

@@ -1,11 +1,10 @@
-import Link from 'next/link';
-import { useState } from 'react';
+import { MouseEventHandler, useState } from 'react';
 import { LandPreviewInfo } from './LandPreviewInfo';
 import { LandFilter } from './LandFilter';
 import { option } from './land-filter-type';
 import { LandDetailItemProps } from './land-detail-types';
 import LandDetailItem from './LandDetailItem';
-import { Transition } from '@headlessui/react';
+import { XCircleIcon } from '@heroicons/react/solid';
 
 const LandDetailsData: LandDetailItemProps[] = [
   {
@@ -65,15 +64,22 @@ const filter_options: option[] = [
   { id: 3, name: 'Pending', filter: 'pending' },
 ];
 
-export const LandDetails: React.FC = () => {
+interface LandDetailsProps {
+  close: MouseEventHandler;
+};
+
+export const LandDetails: React.FC<LandDetailsProps> = ({close}) => {
   const [selectedOption, setSelectedOption] = useState(filter_options[0]);
 
   return (
-    <div className="h-96 mx-2 rounded-2xl flex overflow-hidden divide-sky-200 divide-x shadow-2xl">
-      <div className="h-full bg-blue-100 w-48 flex flex-col divide-y divide-blue-200">
+    <div className="h-96 mx-2 rounded-2xl flex w-fit overflow-hidden divide-sky-200 divide-x shadow-md sm:shadow-2xl ring-1 sm:ring-0 ring-blue-300">
+      <div className="h-full bg-blue-100 w-64 sm:w-52 flex flex-col divide-y divide-blue-200">
         <div className="w-full bg-sky-200 flex flex-col relative p-4 shadow-inner">
-          <span className="text-sm w-full h-fit text-sky-700 select-none pb-2">
-            Land Packets
+          <span className="flex text-sky-700">
+            <span className='grow text-sm h-fit select-none pb-2'>Land Packets</span>
+            <button onClick={close}>
+              <XCircleIcon className='h-6 hover:text-blue-500 sm:hidden' />
+            </button>
           </span>
           <LandFilter
             filter_options={filter_options}
