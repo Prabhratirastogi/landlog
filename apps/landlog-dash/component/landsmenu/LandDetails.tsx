@@ -66,9 +66,9 @@ const filter_options: option[] = [
 
 interface LandDetailsProps {
   close: MouseEventHandler;
-};
+}
 
-export const LandDetails: React.FC<LandDetailsProps> = ({close}) => {
+export const LandDetails: React.FC<LandDetailsProps> = ({ close }) => {
   const [selectedOption, setSelectedOption] = useState(filter_options[0]);
 
   return (
@@ -76,9 +76,9 @@ export const LandDetails: React.FC<LandDetailsProps> = ({close}) => {
       <div className="h-full bg-blue-100 w-64 sm:w-52 flex flex-col divide-y divide-blue-200">
         <div className="w-full bg-sky-200 flex flex-col relative p-4 shadow-inner">
           <span className="flex text-sky-700">
-            <span className='grow text-sm h-fit select-none pb-2'>Land Packets</span>
+            <span className="grow text-sm h-fit select-none pb-2">Land Packets</span>
             <button onClick={close}>
-              <XCircleIcon className='h-6 hover:text-blue-500 sm:hidden' />
+              <XCircleIcon className="h-6 hover:text-blue-500 sm:hidden" />
             </button>
           </span>
           <LandFilter
