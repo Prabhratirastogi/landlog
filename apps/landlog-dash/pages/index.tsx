@@ -39,7 +39,7 @@ const Home: NextPage = () => {
 
         <Transition
           show={isDrawerOpen}
-          className="w-full h-96 my-2 mx-4 rounded-2xl flex"
+          className="w-full h-96 my-2 mx-4 rounded-2xl flex z-100 absolute"
           enter="transition-transform transform-gpu ease-out"
           enterFrom="-translate-y-3"
           enterTo="transalte-y-0"

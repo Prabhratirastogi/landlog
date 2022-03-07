@@ -13,7 +13,7 @@ export const LandPreviewInfo: React.FC = () => {
           >
             Show details
           </div>
-          <Link href="/land/land_1" passHref>
+          <Link href="/land/1" passHref>
             <div className="place-self-center ml-2 bg-sky-200 p-1 rounded-xl group-hover:bg-sky-300">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
