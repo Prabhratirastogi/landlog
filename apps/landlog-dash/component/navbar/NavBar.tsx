@@ -1,8 +1,8 @@
 import { MouseEventHandler, ReactNode } from 'react';
 import Image from 'next/image';
-import { useStore } from '../../store';
-import { classNames } from 'utils/classNames';
 import { useRouter } from 'next/router';
+import { classNames } from 'utils/classNames';
+import { useStore } from '../../store';
 
 interface NavItemProps {
   children: ReactNode;
@@ -14,16 +14,15 @@ const NavItem: React.FC<NavItemProps> = ({ children, onclick, active }) => {
   const router = useRouter();
 
   return (
-    <li
-      className={classNames(
-        active && router.pathname == '/' && 'bg-sky-300 shadow-inner',
+    <div
+      className={classNames(((active && router.pathname == '/') ? 'bg-sky-300 shadow-inner' : ''),
         'px-4 py-1 m-2 rounded-lg hover:bg-sky-300/50 cursor-default hover:shadow-inner hover:transition-colors transition duration-50 ease-in',
       )}
     >
       <div className="text-sky-600 flex" onClick={onclick}>
         {children}
       </div>
-    </li>
+    </div>
   );
 };
 
