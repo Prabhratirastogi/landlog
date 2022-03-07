@@ -15,7 +15,8 @@ const NavItem: React.FC<NavItemProps> = ({ children, onclick, active }) => {
 
   return (
     <div
-      className={classNames(((active && router.pathname == '/') ? 'bg-sky-300 shadow-inner' : ''),
+      className={classNames(
+        active && router.pathname == '/' ? 'bg-sky-300 shadow-inner' : '',
         'px-4 py-1 m-2 rounded-lg hover:bg-sky-300/50 cursor-default hover:shadow-inner hover:transition-colors transition duration-50 ease-in',
       )}
     >

@@ -20,14 +20,15 @@ let LandMenuStore: any = (set: any) => ({
   setStateFilter: (filter: states_type) =>
     set((state: LandMenuState) => ({ stateFilter: filter })),
   isDetailsOpen: false,
-  toggleDetails: () => set((state: LandMenuState) => ({ isDetailsOpen: !state.isDetailsOpen })),
+  toggleDetails: () =>
+    set((state: LandMenuState) => ({ isDetailsOpen: !state.isDetailsOpen })),
 });
 
 LandMenuStore = devtools(LandMenuStore);
 
 export const useStore = create<LandMenuState>(
   // persist(
-    LandMenuStore, 
+  LandMenuStore,
   //   {
   //   name: 'landlog-store',
   //   getStorage: () => localStorage,
