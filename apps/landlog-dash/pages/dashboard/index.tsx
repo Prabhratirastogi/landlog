@@ -1,5 +1,4 @@
 import type { AppProps } from 'next/app';
-import { Card, Space } from 'antd';
 import BaseLayout from '../../component/navbar/BaseLayout';
 import Head from 'next/head';
 import { Button } from 'ui';
@@ -13,7 +12,7 @@ function Dashboard({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-    <div>Apple</div>
+      <div>Apple</div>
     </BaseLayout>
   );
 }

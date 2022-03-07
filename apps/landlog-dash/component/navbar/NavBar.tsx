@@ -3,11 +3,9 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { classNames } from 'utils/classNames';
 import { useStore } from '../../store';
-import { Disclosure, Menu, Transition } from '@headlessui/react'
+import { Disclosure, Menu, Transition } from '@headlessui/react';
 
-const navItemData : NavItemProps[] = [
-  {  }
-];
+const navItemData: NavItemProps[] = [{}];
 
 interface NavItemProps {
   // children: ReactNode;
@@ -40,7 +38,6 @@ const NavBar: React.FC = () => {
     state.isDrawerOpen,
   ]);
   const router = useRouter();
-  
 
   return (
     <ul className="flex flex-row sm:px-2 sm:pr-4 bg-gradient-to-r from-blue-100 to-sky-100 ring-1 ring-blue-200 backdrop-blur mb-0 shadow-lg select-none">
@@ -65,7 +62,7 @@ const NavBar: React.FC = () => {
         <span className="pl-2">Lands</span>
       </NavItem>
 
-      <span className='grow sm:hidden'/>
+      <span className="grow sm:hidden" />
 
       <NavItem onclick={() => router.push('/dashboard')}>
         <Image src="/favicon.ico" alt="" width={20} height={20} />
