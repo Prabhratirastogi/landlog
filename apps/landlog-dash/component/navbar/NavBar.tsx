@@ -3,14 +3,21 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { classNames } from 'utils/classNames';
 import { useStore } from '../../store';
+import { Disclosure, Menu, Transition } from '@headlessui/react'
+
+const navItemData : NavItemProps[] = [
+  {  }
+];
 
 interface NavItemProps {
-  children: ReactNode;
+  // children: ReactNode;
   onclick?: MouseEventHandler;
   active?: boolean;
 }
 
-const NavItem: React.FC<NavItemProps> = ({ children, onclick, active }) => {
+type NavItem = ReactNode & NavItemProps;
+
+const NavItem: React.FC<NavItem> = ({ children, onclick, active }) => {
   const router = useRouter();
 
   return (
@@ -33,9 +40,10 @@ const NavBar: React.FC = () => {
     state.isDrawerOpen,
   ]);
   const router = useRouter();
+  
 
   return (
-    <ul className="flex px-2 pr-4 bg-gradient-to-r from-blue-100 to-sky-100 ring-1 ring-blue-200 backdrop-blur mb-0 shadow-lg select-none">
+    <ul className="flex flex-row sm:px-2 sm:pr-4 bg-gradient-to-r from-blue-100 to-sky-100 ring-1 ring-blue-200 backdrop-blur mb-0 shadow-lg select-none">
       <NavItem
         onclick={router.pathname === '/' ? toggleDrawer : () => router.push('/')}
         active={isDrawerOpen}
@@ -57,14 +65,16 @@ const NavBar: React.FC = () => {
         <span className="pl-2">Lands</span>
       </NavItem>
 
+      <span className='grow sm:hidden'/>
+
       <NavItem onclick={() => router.push('/dashboard')}>
         <Image src="/favicon.ico" alt="" width={20} height={20} />
         <span className="pl-2">LandLog</span>
-        <span className="pl-2 text-slate-800">| Technoculture</span>
+        <span className="hidden sm:inline pl-2 text-slate-800">| Technoculture</span>
       </NavItem>
 
-      <span className="grow" />
-      <div className="mx-4 place-self-center place-content-center relative flex">
+      <span className="sm:grow" />
+      <div className="hidden sm:flex sm:mx-4 place-self-center place-content-center relative">
         <input
           className="pl-10 h-7 bg-blue-50 text-slate-500 placeholder:italic placeholder:font-normal placeholder:text-blue-300 focus:outline-none rounded-lg inset-2 caret-blue-400 focus:ring-1 ring-blue-200 hover:shadow-inner selection:bg-blue-300"
           placeholder="Search..."

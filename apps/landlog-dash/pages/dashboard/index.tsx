@@ -13,16 +13,7 @@ function Dashboard({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Space direction="horizontal">
-        <Card title="Card" style={{ width: 300 }}>
-          <p>Card content</p>
-          <Button />
-        </Card>
-        <Card title="Card" style={{ width: 300 }}>
-          <p>Card content</p>
-          <p>Card content</p>
-        </Card>
-      </Space>
+    <div>Apple</div>
     </BaseLayout>
   );
 }
