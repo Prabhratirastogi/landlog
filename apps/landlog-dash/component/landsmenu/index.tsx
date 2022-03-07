@@ -138,7 +138,7 @@ export default function LandsMenu() {
       </div>
       <Transition
         show={active > -1}
-        className="absolute inset-2 m-2 sm:m-0 w-64 sm:w-96 sm:relative"
+        className="absolute inset-2 m-2 sm:m-0 sm:inset-0 w-64 sm:w-96 sm:relative"
         enter="transition-transform transform-gpu ease-out"
         enterFrom="-translate-x-2"
         enterTo="translate-x-0"
