@@ -114,9 +114,9 @@ export default function LandsMenu() {
 
   return (
     <>
-      <div className="h-full w-64 rounded-2xl cursor-default overflow-x-hidden ring-1 ring-blue-200 shadow-2xl">
+      <div className="h-full w-64 rounded-2xl cursor-default overflow-hidden ring-1 ring-blue-200 shadow-2xl flex flex-col">
         <FilterPane />
-        <div className="w-64 h-full overflow-y-scroll">
+        <div className="overflow-y-scroll">
           <div className="bg-blue-100 divide-y divide-blue-200">
             {lands.map((land, index) => (
               <LandItem
