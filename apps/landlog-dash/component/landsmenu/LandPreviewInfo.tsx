@@ -3,7 +3,7 @@ import { ArrowsExpandIcon } from '@heroicons/react/outline';
 
 export const LandPreviewInfo: React.FC = () => {
   return (
-    <div className="bg-sky-100 w-72 md:flex flex-col hidden">
+    <div className="bg-sky-100 w-64 md:w-72 lg:w-96 md:flex flex-col hidden">
       <div className="text-sm bg-sky-blue h-fit p-3 text-sky-700 flex">
         <span className="flex-grow place-self-center select-none">Details</span>
 
