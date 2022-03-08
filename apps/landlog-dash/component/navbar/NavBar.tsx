@@ -3,7 +3,12 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { classNames } from 'utils/classNames';
 import { useStore } from '../../store';
-import { ChevronRightIcon, ChevronDownIcon, CollectionIcon, SearchIcon } from '@heroicons/react/outline';
+import {
+  ChevronRightIcon,
+  ChevronDownIcon,
+  CollectionIcon,
+  SearchIcon,
+} from '@heroicons/react/outline';
 
 const navItemData: NavItemProps[] = [{}];
 
@@ -45,9 +50,15 @@ const NavBar: React.FC = () => {
         onclick={router.pathname === '/' ? toggleDrawer : () => router.push('/')}
         active={isDrawerOpen}
       >
-        <CollectionIcon className='h-4 place-self-center'/>
+        <CollectionIcon className="h-4 place-self-center" />
         <span className="pl-2">Lands</span>
-        <div className='ml-2 place-self-center'>{ isDrawerOpen ? <ChevronDownIcon className='h-4' /> : <ChevronRightIcon className='h-4' />}</div>
+        <div className="ml-2 place-self-center">
+          {isDrawerOpen ? (
+            <ChevronDownIcon className="h-4" />
+          ) : (
+            <ChevronRightIcon className="h-4" />
+          )}
+        </div>
       </NavItem>
 
       <span className="grow sm:hidden" />
