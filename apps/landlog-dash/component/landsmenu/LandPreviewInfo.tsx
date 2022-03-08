@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { ArrowsExpandIcon } from '@heroicons/react/outline';
 
 export const LandPreviewInfo: React.FC = () => {
   return (
@@ -15,20 +16,7 @@ export const LandPreviewInfo: React.FC = () => {
           </div>
           <Link href="/land/1" passHref>
             <div className="place-self-center ml-2 bg-sky-200 p-1 rounded-xl group-hover:bg-sky-300">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
-                />
-              </svg>
+              <ArrowsExpandIcon className="h-4 w-4" />
             </div>
           </Link>
         </div>

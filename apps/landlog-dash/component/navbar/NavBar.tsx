@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { classNames } from 'utils/classNames';
 import { useStore } from '../../store';
+import { ChevronRightIcon, ChevronDownIcon, CollectionIcon, SearchIcon } from '@heroicons/react/outline';
 
 const navItemData: NavItemProps[] = [{}];
 
@@ -21,7 +22,7 @@ const NavItem: React.FC<NavItem> = ({ children, onclick, active }) => {
     <div
       className={classNames(
         active && router.pathname == '/' ? 'bg-sky-300 shadow-inner' : '',
-        'px-4 py-1 m-2 rounded-lg hover:bg-sky-300/50 cursor-default hover:shadow-inner hover:transition-colors transition duration-50 ease-in',
+        'px-3 py-1 mx-1 my-2 rounded-lg hover:bg-sky-300/50 cursor-default hover:shadow-inner hover:transition-colors transition duration-50 ease-in',
       )}
     >
       <div className="text-sky-600 flex" onClick={onclick}>
@@ -44,21 +45,9 @@ const NavBar: React.FC = () => {
         onclick={router.pathname === '/' ? toggleDrawer : () => router.push('/')}
         active={isDrawerOpen}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-4 w-4 place-self-center"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
-          />
-        </svg>
+        <CollectionIcon className='h-4 place-self-center'/>
         <span className="pl-2">Lands</span>
+        <div className='ml-2 place-self-center'>{ isDrawerOpen ? <ChevronDownIcon className='h-4' /> : <ChevronRightIcon className='h-4' />}</div>
       </NavItem>
 
       <span className="grow sm:hidden" />
@@ -77,20 +66,7 @@ const NavBar: React.FC = () => {
           name="search"
           type="text"
         />
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-6 absolute left-0 place-self-center pl-2 ml-1 text-blue-400 pointer-events-none"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-          />
-        </svg>
+        <SearchIcon className="w-6 absolute left-0 place-self-center pl-2 ml-1 text-blue-400 pointer-events-none" />
       </div>
     </ul>
   );

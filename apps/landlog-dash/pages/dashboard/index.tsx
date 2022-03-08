@@ -14,7 +14,7 @@ function Dashboard({ Component, pageProps }: AppProps) {
 
       <div className="p-4 pt-8 bg-slate-50 flex flex-col">
         <div className="max-w-md place-self-center">
-          <h1 className='text-md text-slate-500'>Preferences</h1>
+          <h1 className="text-md text-slate-500">Preferences</h1>
         </div>
       </div>
     </BaseLayout>
