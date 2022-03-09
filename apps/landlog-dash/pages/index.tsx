@@ -7,7 +7,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 import { useStore } from '../store';
 import { AppLayout } from '../component/AppLayout';
-import LandsMenu from '../component/menu';
+import LandsMenu from 'ui/menu';
 import { LocationMarkerIcon } from '@heroicons/react/solid';
 
 const geojson: GeoJSON.FeatureCollection = {
