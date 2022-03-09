@@ -11,14 +11,30 @@ import LandsMenu from '../component/landsmenu';
 import { LocationMarkerIcon } from '@heroicons/react/solid';
 import { Position } from 'geojson';
 
-const geojson : GeoJSON.FeatureCollection = {
+const geojson: GeoJSON.FeatureCollection = {
   type: 'FeatureCollection',
   features: [
-    {type: 'Feature', geometry: {type: 'Point', coordinates: [83, 24.8]}, properties: null},
-    {type: 'Feature', geometry: {type: 'Point', coordinates: [82, 24.9]}, properties: null},
-    {type: 'Feature', geometry: {type: 'Point', coordinates: [81, 24.7]}, properties: null},
-    {type: 'Feature', geometry: {type: 'Point', coordinates: [80, 24.6]}, properties: null},
-  ]
+    {
+      type: 'Feature',
+      geometry: { type: 'Point', coordinates: [83, 24.8] },
+      properties: null,
+    },
+    {
+      type: 'Feature',
+      geometry: { type: 'Point', coordinates: [82, 24.9] },
+      properties: null,
+    },
+    {
+      type: 'Feature',
+      geometry: { type: 'Point', coordinates: [81, 24.7] },
+      properties: null,
+    },
+    {
+      type: 'Feature',
+      geometry: { type: 'Point', coordinates: [80, 24.6] },
+      properties: null,
+    },
+  ],
 };
 
 const Home: NextPage = () => {
@@ -42,22 +58,21 @@ const Home: NextPage = () => {
         mapboxAccessToken={mapboxconf.PublicAccessToken}
       >
         <Source id="my-data" type="geojson" data={geojson}>
-        { 
-          geojson.features.map( (location: GeoJSON.Feature, index) => {
+          {geojson.features.map((location: GeoJSON.Feature, index) => {
             const point = location.geometry as GeoJSON.Point;
 
             return (
-              <Marker 
-                longitude={point.coordinates[0]} 
-                latitude={point.coordinates[1]} 
-                anchor="bottom" onClick={(e) => console.log(location.geometry)} 
+              <Marker
+                longitude={point.coordinates[0]}
+                latitude={point.coordinates[1]}
+                anchor="bottom"
+                onClick={(e) => console.log(location.geometry)}
                 key={index}
               >
-                <LocationMarkerIcon className='h-6 text-sky-400 hover:text-sky-800' />
+                <LocationMarkerIcon className="h-6 text-sky-400 hover:text-sky-800" />
               </Marker>
-            ); 
-          } )
-        }
+            );
+          })}
         </Source>
       </Map>
 
