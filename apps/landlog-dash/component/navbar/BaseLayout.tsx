@@ -1,4 +1,4 @@
-import NavBar from './NavBar';
+import { MouseEventHandler, ReactFragment } from 'react';
 
 const Footer: React.FC = () => {
   return (
@@ -10,10 +10,15 @@ const Footer: React.FC = () => {
   );
 };
 
-const BaseLayout: React.FC = ({ children }) => {
+interface BaseLayoutProps {
+  children: ReactFragment,
+  toggleDrawer?: MouseEventHandler,
+  isDrawerOpen?: boolean
+};
+
+const BaseLayout: React.FC<BaseLayoutProps> = ({ children, toggleDrawer = () => {}, isDrawerOpen = false }) => {
   return (
     <div className="w-screen h-screen overflow-hidden">
-      <NavBar />
       <div className="">{children}</div>
       <Footer />
     </div>

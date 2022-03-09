@@ -6,10 +6,9 @@ import * as mapboxconf from '../component/mapbox.config';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 import { useStore } from '../store';
-import BaseLayout from '../component/navbar/BaseLayout';
+import { AppLayout } from '../component/AppLayout';
 import LandsMenu from '../component/landsmenu';
 import { LocationMarkerIcon } from '@heroicons/react/solid';
-import { Position } from 'geojson';
 
 const geojson: GeoJSON.FeatureCollection = {
   type: 'FeatureCollection',
@@ -76,7 +75,7 @@ const Home: NextPage = () => {
         </Source>
       </Map>
 
-      <BaseLayout>
+      <AppLayout>
         <Head>
           <title>LandLog | Home</title>
           <meta name="description" content="View all your land on a central dashboard." />
@@ -95,7 +94,7 @@ const Home: NextPage = () => {
         >
           <LandsMenu />
         </Transition>
-      </BaseLayout>
+      </AppLayout>
     </>
   );
 };
