@@ -2,15 +2,15 @@ import { MouseEventHandler, ReactFragment } from 'react';
 import { SearchIcon } from '@heroicons/react/outline';
 
 interface NavBarProps {
-  children: ReactFragment,
-  toggleDrawer: MouseEventHandler,
-  isDrawerOpen: boolean
-};
+  children: ReactFragment;
+  toggleDrawer: MouseEventHandler;
+  isDrawerOpen: boolean;
+}
 
-export const NavBar: React.FC<NavBarProps> = ({children, toggleDrawer, isDrawerOpen}) => {
+export const NavBar: React.FC<NavBarProps> = ({ children, toggleDrawer, isDrawerOpen }) => {
   return (
     <ul className="flex flex-row sm:px-2 sm:pr-4 bg-gradient-to-r from-blue-100 to-sky-100 ring-1 ring-blue-200 backdrop-blur mb-0 shadow-lg select-none">
-      { children }
+      {children}
 
       <span className="sm:grow" />
       <div className="hidden sm:flex sm:mx-4 place-self-center place-content-center relative">
@@ -25,5 +25,3 @@ export const NavBar: React.FC<NavBarProps> = ({children, toggleDrawer, isDrawerO
     </ul>
   );
 };
-
-export default NavBar;

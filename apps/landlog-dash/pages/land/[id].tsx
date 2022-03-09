@@ -1,15 +1,15 @@
 import type { AppProps } from 'next/app';
-import BaseLayout from '../../component/navbar/BaseLayout';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { AppLayout } from '../../component/AppLayout';
 
 function About({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const { id } = router.query;
 
   return (
-    <BaseLayout>
+    <AppLayout>
       <Head>
         <title>LandLog | Land {id}</title>
         <meta name="description" content="View all your land on a central dashboard." />
@@ -28,7 +28,7 @@ function About({ Component, pageProps }: AppProps) {
         </span>
         <div className="max-w-md w-max bg-slate-50 place-self-center">hello</div>
       </div>
-    </BaseLayout>
+    </AppLayout>
   );
 }
 

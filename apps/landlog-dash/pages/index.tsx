@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { Transition } from '@headlessui/react';
-import Map, { Source, Layer, Marker } from 'react-map-gl';
+import Map, { Source, Marker } from 'react-map-gl';
 import * as mapboxconf from '../component/mapbox.config';
 import 'mapbox-gl/dist/mapbox-gl.css';
 

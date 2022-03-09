@@ -11,12 +11,16 @@ const Footer: React.FC = () => {
 };
 
 interface BaseLayoutProps {
-  children: ReactFragment,
-  toggleDrawer?: MouseEventHandler,
-  isDrawerOpen?: boolean
-};
+  children: ReactFragment;
+  toggleDrawer?: MouseEventHandler;
+  isDrawerOpen?: boolean;
+}
 
-const BaseLayout: React.FC<BaseLayoutProps> = ({ children, toggleDrawer = () => {}, isDrawerOpen = false }) => {
+export const BaseLayout: React.FC<BaseLayoutProps> = ({
+  children,
+  toggleDrawer = () => {},
+  isDrawerOpen = false,
+}) => {
   return (
     <div className="w-screen h-screen overflow-hidden">
       <div className="">{children}</div>
@@ -24,5 +28,3 @@ const BaseLayout: React.FC<BaseLayoutProps> = ({ children, toggleDrawer = () => 
     </div>
   );
 };
-
-export default BaseLayout;

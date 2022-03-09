@@ -1,22 +1,19 @@
 import { useRouter } from 'next/router';
-import NavItem from './navbar/NavItem';
-import NavBar from './navbar/NavBar';
+import { NavBar, NavItem, BaseLayout } from 'ui/layout';
 import Image from 'next/image';
-import {
-  ChevronRightIcon,
-  ChevronDownIcon,
-  CollectionIcon,
-} from '@heroicons/react/outline';
+import { ChevronRightIcon, ChevronDownIcon, CollectionIcon } from '@heroicons/react/outline';
 import { useStore } from '../store';
-import BaseLayout from './navbar/BaseLayout';
 
-export const AppLayout : React.FC = ({children}) => {
+export const AppLayout: React.FC = ({ children }) => {
   const router = useRouter();
-  const [toggleDrawer, isDrawerOpen] = useStore(state => [state.toggleDrawer, state.isDrawerOpen]);
+  const [toggleDrawer, isDrawerOpen] = useStore((state) => [
+    state.toggleDrawer,
+    state.isDrawerOpen,
+  ]);
 
   return (
     <BaseLayout>
-      <NavBar toggleDrawer={toggleDrawer} isDrawerOpen={isDrawerOpen} >
+      <NavBar toggleDrawer={toggleDrawer} isDrawerOpen={isDrawerOpen}>
         <NavItem
           onclick={router.pathname === '/' ? toggleDrawer : () => router.push('/')}
           active={isDrawerOpen}
@@ -41,7 +38,7 @@ export const AppLayout : React.FC = ({children}) => {
         </NavItem>
       </NavBar>
 
-    { children }
+      {children}
     </BaseLayout>
   );
-}
+};

@@ -1,11 +1,10 @@
 import type { AppProps } from 'next/app';
-import BaseLayout from '../../component/navbar/BaseLayout';
+import { AppLayout } from '../../component/AppLayout';
 import Head from 'next/head';
-import { Button } from 'ui';
 
 function Dashboard({ Component, pageProps }: AppProps) {
   return (
-    <BaseLayout>
+    <AppLayout>
       <Head>
         <title>LandLog | Dashboard</title>
         <meta name="description" content="View all your land on a central dashboard." />
@@ -17,7 +16,7 @@ function Dashboard({ Component, pageProps }: AppProps) {
           <h1 className="text-md text-slate-500">Preferences</h1>
         </div>
       </div>
-    </BaseLayout>
+    </AppLayout>
   );
 }
 

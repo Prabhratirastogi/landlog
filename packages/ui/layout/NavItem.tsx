@@ -8,7 +8,7 @@ interface NavItemProps {
   active?: boolean;
 }
 
-const NavItem: React.FC<NavItemProps> = ({ children, onclick, active }) => {
+export const NavItem: React.FC<NavItemProps> = ({ children, onclick, active }) => {
   const router = useRouter();
 
   return (
@@ -24,5 +24,3 @@ const NavItem: React.FC<NavItemProps> = ({ children, onclick, active }) => {
     </div>
   );
 };
-
-export default NavItem;
