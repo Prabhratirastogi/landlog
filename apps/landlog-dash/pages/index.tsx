@@ -1,13 +1,25 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { Transition } from '@headlessui/react';
-import Map from 'react-map-gl';
+import Map, { Source, Layer, Marker } from 'react-map-gl';
 import * as mapboxconf from '../component/mapbox.config';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 import { useStore } from '../store';
 import BaseLayout from '../component/navbar/BaseLayout';
 import LandsMenu from '../component/landsmenu';
+import { LocationMarkerIcon } from '@heroicons/react/solid';
+import { Position } from 'geojson';
+
+const geojson : GeoJSON.FeatureCollection = {
+  type: 'FeatureCollection',
+  features: [
+    {type: 'Feature', geometry: {type: 'Point', coordinates: [83, 24.8]}, properties: null},
+    {type: 'Feature', geometry: {type: 'Point', coordinates: [82, 24.9]}, properties: null},
+    {type: 'Feature', geometry: {type: 'Point', coordinates: [81, 24.7]}, properties: null},
+    {type: 'Feature', geometry: {type: 'Point', coordinates: [80, 24.6]}, properties: null},
+  ]
+};
 
 const Home: NextPage = () => {
   const isDrawerOpen = useStore((state) => state.isDrawerOpen);
@@ -28,7 +40,26 @@ const Home: NextPage = () => {
         }}
         mapStyle={mapboxconf.MapStyles.minimal}
         mapboxAccessToken={mapboxconf.PublicAccessToken}
-      />
+      >
+        <Source id="my-data" type="geojson" data={geojson}>
+        { 
+          geojson.features.map( (location: GeoJSON.Feature, index) => {
+            const point = location.geometry as GeoJSON.Point;
+
+            return (
+              <Marker 
+                longitude={point.coordinates[0]} 
+                latitude={point.coordinates[1]} 
+                anchor="bottom" onClick={(e) => console.log(location.geometry)} 
+                key={index}
+              >
+                <LocationMarkerIcon className='h-6 text-sky-400 hover:text-sky-800' />
+              </Marker>
+            ); 
+          } )
+        }
+        </Source>
+      </Map>
 
       <BaseLayout>
         <Head>
