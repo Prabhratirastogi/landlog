@@ -1,3 +1,4 @@
+import { MouseEvent } from 'react';
 import { classNames } from 'utils/classNames';
 
 export type states_type = 'all' | 'bh' | 'jh' | 'wb' | 'up' | 'od';
@@ -15,7 +16,7 @@ export type SelectableTagProps = {
 };
 
 export const SelectableTag = ({ filter }: SelectableTagProps) => {
-  const [stateFilter, setStateFilter] = ["all", (e) => console.log(e)];
+  const [stateFilter, setStateFilter] = ['all', (e: states_type) => console.log(e)];
 
   return (
     <>
