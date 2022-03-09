@@ -1,4 +1,3 @@
-import { useStore } from '../../store';
 import { classNames } from 'utils/classNames';
 
 export type states_type = 'all' | 'bh' | 'jh' | 'wb' | 'up' | 'od';
@@ -16,10 +15,7 @@ export type SelectableTagProps = {
 };
 
 export const SelectableTag = ({ filter }: SelectableTagProps) => {
-  const [stateFilter, setStateFilter] = useStore((state) => [
-    state.stateFilter,
-    state.setStateFilter,
-  ]);
+  const [stateFilter, setStateFilter] = ["all", (e) => console.log(e)];
 
   return (
     <>
