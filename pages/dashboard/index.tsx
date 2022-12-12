@@ -2,7 +2,7 @@ import type { AppProps } from 'next/app';
 import { AppLayout } from '../../component/AppLayout';
 import Head from 'next/head';
 
-function Dashboard({ Component, pageProps }: AppProps) {
+function Dashboard ({ Component, pageProps }: AppProps) {
   return (
     <AppLayout>
       <Head>
