@@ -1,0 +1,44 @@
+{
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "display": "Next.js",
+    "compilerOptions": {
+        "allowJs": true,
+        "composite": false,
+        "declaration": true,
+        "declarationMap": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "incremental": true,
+        "inlineSources": false,
+        "isolatedModules": true,
+        "lib": [
+            "ES2021",
+            "DOM",
+            "DOM.Iterable"
+        ],
+        "module": "esnext",
+        "moduleResolution": "node",
+        "noUnusedLocals": false,
+        "noUnusedParameters": false,
+        "preserveWatchOutput": true,
+        "resolveJsonModule": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "typeRoots": [
+            "../../node_modules/@types"
+        ],
+        "jsx": "preserve",
+        "noEmit": true,
+        "target": "es5"
+    },
+    "include": [
+        "next-env.d.ts",
+        "**/*.ts",
+        "**/*.tsx",
+        "../../packages/utils/useActiveSelection.tsx",
+        "../../packages/utils/classNames.tsx"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}
