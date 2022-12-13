@@ -1,29 +1,34 @@
 import React,{useState} from "react";
-import {signInWithEmailAndPassword , sendEmailVerification} from 'firebase/auth';
-import {auth} from '../../firebase';
-import {useNavigate} from "react-router-dom";
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import auth from '../../firebase';
+// import {useNavigate} from "react-router-dom";
 
 const Login = () => {
 
-    const Navigate = useNavigate();
+    // const Navigate = useNavigate();
 
     const[email,setEmail] = useState('');
     const[password,setPassword] = useState('');
-    const handleLogin = () => {
-        signInWithEmailAndPassword(auth,email,password)
-        .then(() => {
-            if(!auth.currentUser.emailVerified){
-                sendEmailVerification(auth.currentUser)
-                .then(() => {
-                    useNavigate('/')
-                })
-                .catch(err => alert(err.message))
-            }
-            else{
-                useNavigate('/login')
-            }
-        })
-        .catch(err => alert(err.message))
+    const handleLogin =  () => {
+      if(email === '' || password === ''){
+        console.log("please fill all feilds");
+        return;
+      }
+      const authentication = auth;
+      signInWithEmailAndPassword(authentication,email,password)
+      .then((response) => {
+        console.log("login successful")
+      }).catch((e) => {
+        var ecode = e.code;
+        if(ecode === 'auth/wrong-password'){
+          console.log("the password is wrong")
+          return;
+        }
+        if (ecode === 'auth/user-not-found'){
+          console.log("User not found")
+          return;
+        }       
+      })
     }
   return (
     <>
@@ -39,7 +44,7 @@ const Login = () => {
 
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-            <form className="space-y-6" action="#" method="POST">
+            <div className="space-y-6">
               
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700">
@@ -80,7 +85,7 @@ const Login = () => {
                 </div>
               </div>
 
-              <div className="flex items-center justify-between">
+              {/* <div className="flex items-center justify-between">
                 <div className="flex items-center">
                   <input
                     id="remember-me"
@@ -93,23 +98,22 @@ const Login = () => {
                   </label>
                 </div>
 
-                <div className="text-sm">
+                {/* <div className="text-sm">
                   <a href="#" className="font-medium text-sky-600 hover:text-sky-500">
                     Forgot your password?
                   </a>
-                </div>
-              </div>
+                </div> </div>*/}
+              
 
               <div>
                 <button
                   onClick={handleLogin}
-                  type="submit"
                   className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
                 >
                   Sign in
                 </button>
               </div>
-            </form>
+            </div>
 
             <div className="mt-6">
               <div className="relative">
@@ -136,4 +140,4 @@ const Login = () => {
   )
 }
 
-export default Login;
+export default Login
