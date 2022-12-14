@@ -4,6 +4,7 @@ import { Transition } from '@headlessui/react';
 import Map, { Source, Marker } from 'react-map-gl';
 import * as mapboxconf from '../component/mapbox.config';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import Router from 'next/router';
 
 import { useStore } from '../store';
 import { AppLayout } from '../component/AppLayout';
@@ -38,7 +39,17 @@ const geojson: GeoJSON.FeatureCollection = {
 
 const Home: NextPage = () => {
     const isDrawerOpen = useStore((state) => state.isDrawerOpen);
-
+    var email: string | null = ""
+    var password: string | null = ""
+    if (typeof window !== 'undefined') {
+        // Perform localStorage action
+        email = localStorage.getItem('email');
+        password = localStorage.getItem('password');
+    }
+    if(email === null || password === null){
+        Router.push("/login");
+    }
+    
     return (
         <>
             <Map

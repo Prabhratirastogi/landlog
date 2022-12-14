@@ -1,6 +1,7 @@
 import React,{useState} from "react";
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import auth from '../../firebase';
+import Router from 'next/router'
 // import {useNavigate} from "react-router-dom";
 
 const Login = () => {
@@ -18,6 +19,9 @@ const Login = () => {
       signInWithEmailAndPassword(authentication,email,password)
       .then((response) => {
         console.log("login successful")
+        localStorage.setItem("email" , email)
+        localStorage.setItem("password" , password)
+        Router.push("/")
       }).catch((e) => {
         var ecode = e.code;
         if(ecode === 'auth/wrong-password'){
