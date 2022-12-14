@@ -5,7 +5,11 @@ import { ChevronRightIcon, ChevronDownIcon, CollectionIcon } from '@heroicons/re
 import { useStore } from '../store';
 import React from 'react';
 
-export const AppLayout: React.FC = ({ children }: any) => {
+type ContainerProp ={
+  children: React.ReactNode;
+}
+
+export const AppLayout = (props: ContainerProp) => {
   const router = useRouter();
   const [toggleDrawer, isDrawerOpen] = useStore((state) => [
     state.toggleDrawer,
@@ -39,7 +43,7 @@ export const AppLayout: React.FC = ({ children }: any) => {
         </NavItem>
       </NavBar>
 
-      { children }
+      { props.children }
     </BaseLayout>
   );
 };
