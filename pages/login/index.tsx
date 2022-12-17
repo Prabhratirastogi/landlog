@@ -1,39 +1,42 @@
 import React,{useState} from "react";
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
-import auth from '../../firebase';
-import Router from 'next/router'
+import Link from 'next/link';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+ import initFirebase from '../../firebase';
+import Router from 'next/router';
+
+// import { Form } from "react-router-dom";
 // import {useNavigate} from "react-router-dom";
 
 const Login = () => {
-
+  const auth = initFirebase;
     // const Navigate = useNavigate();
 
     const[email,setEmail] = useState('');
     const[password,setPassword] = useState('');
+    const[error,setError] = useState('');
     const handleLogin =  () => {
       if(email === '' || password === ''){
         console.log("please fill all feilds");
+        setError("All feilds are not filled")
         return;
       }
-      const authentication = auth;
-      signInWithEmailAndPassword(authentication,email,password)
-      .then((response) => {
+      signInWithEmailAndPassword(auth,email,password)
+      .then(() => {
         console.log("login successful")
-        localStorage.setItem("email" , email)
-        localStorage.setItem("password" , password)
         Router.push("/")
       }).catch((e) => {
         var ecode = e.code;
         if(ecode === 'auth/wrong-password'){
-          console.log("the password is wrong")
+          setError("the password is wrong")
           return;
         }
         if (ecode === 'auth/user-not-found'){
-          console.log("User not found")
+          setError("User not found")
           return;
         }       
       })
     }
+    console.log(error)
   return (
     <>
       <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">

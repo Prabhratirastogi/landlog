@@ -1,4 +1,9 @@
 import type { NextPage } from 'next';
+import {useEffect} from 'react';
+import initFirebase from '../firebase'
+import { useRouter } from 'next/router';
+import {getAuth,onAuthStateChanged} from 'firebase/auth';
+// import { useAuth } from './context/AuthUserContext';
 import Head from 'next/head';
 import { Transition } from '@headlessui/react';
 import Map, { Source, Marker } from 'react-map-gl';
@@ -39,16 +44,22 @@ const geojson: GeoJSON.FeatureCollection = {
 
 const Home: NextPage = () => {
     const isDrawerOpen = useStore((state) => state.isDrawerOpen);
-    var email: string | null = ""
-    var password: string | null = ""
-    if (typeof window !== 'undefined') {
-        // Perform localStorage action
-        email = localStorage.getItem('email');
-        password = localStorage.getItem('password');
-    }
-    if(email === null || password === null){
-        Router.push("/login");
-    }
+    // const{authUser,loading} = useAuth();
+    const router = useRouter();
+
+    useEffect(() => {
+      const auth = initFirebase;
+      return () => {
+        onAuthStateChanged(auth,(user) => {
+            if(user){
+                console.log("the user is logged in: ",user)
+            }else{
+                console.log("the user is not signed ")
+                router.push("/login")
+            }
+        })
+      }
+    }, [])
     
     return (
         <>
