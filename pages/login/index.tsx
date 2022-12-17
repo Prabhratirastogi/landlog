@@ -1,16 +1,11 @@
 import React,{useState} from "react";
-import Link from 'next/link';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
- import initFirebase from '../../firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import initFirebase from '../../firebase';
 import Router from 'next/router';
 
-// import { Form } from "react-router-dom";
-// import {useNavigate} from "react-router-dom";
 
 const Login = () => {
-  const auth = initFirebase;
-    // const Navigate = useNavigate();
-
+   const auth = initFirebase;
     const[email,setEmail] = useState('');
     const[password,setPassword] = useState('');
     const[error,setError] = useState('');

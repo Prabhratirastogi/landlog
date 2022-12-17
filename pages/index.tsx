@@ -2,14 +2,13 @@ import type { NextPage } from 'next';
 import {useEffect} from 'react';
 import initFirebase from '../firebase'
 import { useRouter } from 'next/router';
-import {getAuth,onAuthStateChanged} from 'firebase/auth';
+import {onAuthStateChanged} from 'firebase/auth';
 // import { useAuth } from './context/AuthUserContext';
 import Head from 'next/head';
 import { Transition } from '@headlessui/react';
 import Map, { Source, Marker } from 'react-map-gl';
 import * as mapboxconf from '../component/mapbox.config';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import Router from 'next/router';
 
 import { useStore } from '../store';
 import { AppLayout } from '../component/AppLayout';
