@@ -1,32 +1,37 @@
 import React,{useState} from "react";
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import initFirebase from '../../firebase';
-import Router from 'next/router';
+// import { signInWithEmailAndPassword } from 'firebase/auth';
+// import initFirebase from '../../firebase';
+// import Link from 'next/link';
+import {useRouter} from 'next/router';
+import {useAuth} from '../context/AuthUserContext';
 
 
 const Login = () => {
-   const auth = initFirebase;
     const[email,setEmail] = useState('');
     const[password,setPassword] = useState('');
-    const[error,setError] = useState('');
+    const router = useRouter();
+    const[error,setError] = useState(null);
+    const {signedInWithEmailAndPassword} = useAuth();
+
+
     const handleLogin =  () => {
+      setError(null)
       if(email === '' || password === ''){
         console.log("please fill all feilds");
-        setError("All feilds are not filled")
         return;
       }
-      signInWithEmailAndPassword(auth,email,password)
+      signedInWithEmailAndPassword(email,password)
       .then(() => {
         console.log("login successful")
-        Router.push("/")
-      }).catch((e) => {
+        router.push("/")
+      }).catch(e => {
         var ecode = e.code;
         if(ecode === 'auth/wrong-password'){
-          setError("the password is wrong")
+          setError(e.message)
           return;
         }
         if (ecode === 'auth/user-not-found'){
-          setError("User not found")
+          setError(e.message)
           return;
         }       
       })

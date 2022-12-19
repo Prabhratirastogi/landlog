@@ -3,7 +3,7 @@ import {useEffect} from 'react';
 import initFirebase from '../firebase'
 import { useRouter } from 'next/router';
 import {onAuthStateChanged} from 'firebase/auth';
-// import { useAuth } from './context/AuthUserContext';
+import { useAuth } from './context/AuthUserContext';
 import Head from 'next/head';
 import { Transition } from '@headlessui/react';
 import Map, { Source, Marker } from 'react-map-gl';
@@ -43,22 +43,25 @@ const geojson: GeoJSON.FeatureCollection = {
 
 const Home: NextPage = () => {
     const isDrawerOpen = useStore((state) => state.isDrawerOpen);
-    // const{authUser,loading} = useAuth();
+    const{authUser,loading} = useAuth();
     const router = useRouter();
 
     useEffect(() => {
-      const auth = initFirebase;
-      return () => {
-        onAuthStateChanged(auth,(user) => {
-            if(user){
-                console.log("the user is logged in: ",user)
-            }else{
-                console.log("the user is not signed ")
-                router.push("/login")
-            }
-        })
-      }
-    }, [])
+        if (!loading && !authUser){
+            router.push('/login');
+        }
+    //   const auth = initFirebase;
+    //   return () => {
+    //     onAuthStateChanged(auth,(user) => {
+    //         if(user){
+    //             console.log("the user is logged in: ",user)
+    //         }else{
+    //             console.log("the user is not signed ")
+    //             router.push("/login")
+    //         }
+    //     })
+    //   }
+    }, [authUser, loading])
     
     return (
         <>
