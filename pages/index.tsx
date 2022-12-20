@@ -1,8 +1,6 @@
 import type { NextPage } from 'next';
 import {useEffect} from 'react';
-import initFirebase from '../firebase'
 import { useRouter } from 'next/router';
-import {onAuthStateChanged} from 'firebase/auth';
 import { useAuth } from './context/AuthUserContext';
 import Head from 'next/head';
 import { Transition } from '@headlessui/react';
@@ -50,17 +48,6 @@ const Home: NextPage = () => {
         if (!loading && !authUser){
             router.push('/login');
         }
-    //   const auth = initFirebase;
-    //   return () => {
-    //     onAuthStateChanged(auth,(user) => {
-    //         if(user){
-    //             console.log("the user is logged in: ",user)
-    //         }else{
-    //             console.log("the user is not signed ")
-    //             router.push("/login")
-    //         }
-    //     })
-    //   }
     }, [authUser, loading])
     
     return (
