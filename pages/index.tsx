@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import {useEffect} from 'react';
 import { useRouter } from 'next/router';
-import { useAuth } from './context/AuthUserContext';
+import  {useAuth}  from './context/AuthUserContext';
 import Head from 'next/head';
 import { Transition } from '@headlessui/react';
 import Map, { Source, Marker } from 'react-map-gl';
@@ -48,7 +48,7 @@ const Home: NextPage = () => {
         if (!loading && !authUser){
             router.push('/login');
         }
-    }, [authUser, loading])
+    }, [authUser, loading  , router])
     
     return (
         <>

@@ -1,5 +1,6 @@
 import React,{useState} from "react";
 import {useRouter} from 'next/router';
+import Image from 'next/image';
 import {useAuth} from '../context/AuthUserContext';
 
 
@@ -9,6 +10,8 @@ const Login = () => {
     const router = useRouter();
     const[error,setError] = useState(null);
     const {signedInWithEmailAndPassword} = useAuth();
+    console.log(email);
+    console.log(password);
 
 
     const handleLogin =  () => {
@@ -38,10 +41,12 @@ const Login = () => {
     <>
       <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
-          <img
+          <Image
             className="mx-auto h-12 w-auto"
             src="/logo/logo512.png"
             alt="Workflow"
+            width={40}
+            height={40}
           />
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
         </div>
@@ -114,4 +119,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Login;
