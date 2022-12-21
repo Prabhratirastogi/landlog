@@ -41,10 +41,10 @@ export default function useFirebaseAuth() {
     return () => unsubscribe();
   }, [auth]);
 
-  return {
+  return [
     authUser,
     loading,
     signedInWithEmailAndPassword,
     signedOut
-  };
+  ];
 }
