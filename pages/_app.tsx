@@ -4,7 +4,6 @@ import ProgressBar from '@badrap/bar-of-progress';
 import Router from 'next/router';
 import  AuthUserProvider from './context/AuthUserContext';
 
-
 const progress = new ProgressBar({
   size: 3,
   color: '#0ea5e9',
