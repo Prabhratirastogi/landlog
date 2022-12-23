@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
-import {useEffect} from 'react';
+import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import  {useAuth}  from './context/AuthUserContext';
+import { useAuth } from '../context/AuthUserContext';
 import Head from 'next/head';
 import { Transition } from '@headlessui/react';
 import Map, { Source, Marker } from 'react-map-gl';
@@ -41,48 +41,46 @@ const geojson: GeoJSON.FeatureCollection = {
 
 const Home: NextPage = () => {
     const isDrawerOpen = useStore((state) => state.isDrawerOpen);
-    const{authUser,loading} = useAuth();
+    const { authUser, loading, signOut } = useAuth();
     const router = useRouter();
-
     useEffect(() => {
-        if (!loading && !authUser){
-            router.push('/login');
-        }
-    }, [authUser, loading  , router])
-    
+        if (!loading && !authUser)
+          router.push('/login')
+      }, [authUser, loading , router])
+
     return (
         <>
             <Map
-                initialViewState={ {
+                initialViewState={{
                     longitude: 82.74,
                     latitude: 24.78,
                     zoom: 6.29,
-                } }
-                style={ {
+                }}
+                style={{
                     top: 0,
                     position: 'absolute',
                     zIndex: 0,
                     overflow: 'hidden',
-                } }
-                mapStyle={ mapboxconf.MapStyles.minimal }
-                mapboxAccessToken={ mapboxconf.PublicAccessToken }
+                }}
+                mapStyle={mapboxconf.MapStyles.minimal}
+                mapboxAccessToken={mapboxconf.PublicAccessToken}
             >
-                <Source id="my-data" type="geojson" data={ geojson }>
-                    { geojson.features.map((location: GeoJSON.Feature, index) => {
+                <Source id="my-data" type="geojson" data={geojson}>
+                    {geojson.features.map((location: GeoJSON.Feature, index) => {
                         const point = location.geometry as GeoJSON.Point;
 
                         return (
                             <Marker
-                                longitude={ point.coordinates[0] }
-                                latitude={ point.coordinates[1] }
+                                longitude={point.coordinates[0]}
+                                latitude={point.coordinates[1]}
                                 anchor="bottom"
-                                onClick={ (e) => console.log(location.geometry) }
-                                key={ index }
+                                onClick={(e) => console.log(location.geometry)}
+                                key={index}
                             >
                                 <LocationMarkerIcon className="h-6 text-sky-400 hover:text-sky-800" />
                             </Marker>
                         );
-                    }) }
+                    })}
                 </Source>
             </Map>
 
@@ -94,7 +92,7 @@ const Home: NextPage = () => {
                 </Head>
 
                 <Transition
-                    show={ isDrawerOpen }
+                    show={isDrawerOpen}
                     className="w-full h-96 my-2 mx-4 rounded-2xl flex z-100 absolute"
                     enter="transition-transform transform-gpu ease-out"
                     enterFrom="-translate-y-3"

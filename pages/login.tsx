@@ -1,42 +1,33 @@
-import React,{useState} from "react";
-import {useRouter} from 'next/router';
-import Image from 'next/image';
-import {useAuth} from '../context/AuthUserContext';
+import { useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import Image from 'next/image'
 
+import { useAuth } from '../context/AuthUserContext';
 
 const Login = () => {
-    const[email,setEmail] = useState('');
-    const[password,setPassword] = useState('');
-    const router = useRouter();
-    const[error,setError] = useState(null);
-    const {signedInWithEmailAndPassword} = useAuth();
-    console.log(email);
-    console.log(password);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
+  const router = useRouter();
+  const { signInWithEmailAndPassword } = useAuth();
 
-
-    const handleLogin =  () => {
-      setError(null)
-      if(email === '' || password === ''){
-        console.log("please fill all feilds");
-        return;
-      }
-      signedInWithEmailAndPassword(email,password)
-      .then(() => {
-        console.log("login successful")
-        router.push("/")
-      }).catch(e => {
-        var ecode = e.code;
-        if(ecode === 'auth/wrong-password'){
-          setError(e.message)
-          return;
-        }
-        if (ecode === 'auth/user-not-found'){
-          setError(e.message)
-          return;
-        }       
-      })
+  const handleLogin = () => {
+    setError(null)
+    if (email === '' || password === '') {
+      console.log("please fill all feilds");
+      return;
     }
-    console.log(error)
+    signInWithEmailAndPassword(email,password)
+    .then(authUser => {
+      console.log("Login successful");
+      router.push("/")
+    }).catch(error => {
+      setError(error.message)
+    });
+
+  }
+  console.log(error)
   return (
     <>
       <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -54,7 +45,7 @@ const Login = () => {
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
             <div className="space-y-6">
-              
+
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                   Email address
@@ -64,9 +55,9 @@ const Login = () => {
                     id="email"
                     name="email"
                     type="email"
-                    onChange = {
-                        (e) => {setEmail(e.target.value)}
-                        
+                    onChange={
+                      (e) => { setEmail(e.target.value) }
+
                     }
                     autoComplete="email"
                     required
@@ -83,8 +74,8 @@ const Login = () => {
                   <input
                     id="password"
                     name="password"
-                    onChange = {
-                        (e) => {setPassword(e.target.value)}
+                    onChange={
+                      (e) => { setPassword(e.target.value) }
                     }
                     type="password"
                     autoComplete="current-password"
