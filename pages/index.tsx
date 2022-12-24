@@ -21,19 +21,17 @@ import { LocationMarkerIcon } from '@heroicons/react/solid';
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     try {
       const cookies = nookies.get(ctx);
-      console.log(JSON.stringify(cookies, null, 2));
       const token = await firebaseAdmin.auth().verifyIdToken(cookies.token);
       const { uid, email } = token;
   
       // the user is authenticated!
       // FETCH STUFF HERE
-      console.log("The user is authenticated ",uid)
+   
   
       return {
         props: { message: `Your email is ${email} and your UID is ${uid}.` },
       };
     } catch (err) {
-        console.log("the error has occured")
       // either the `token` cookie didn't exist
       // or token verification failed
       // either way: redirect to the login page
