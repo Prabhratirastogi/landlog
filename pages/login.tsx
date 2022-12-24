@@ -2,26 +2,25 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image'
 
-import { useAuth } from '../context/AuthUserContext';
-
+import { firebaseClient } from '../lib/firebaseClient';
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const router = useRouter();
-  const { signInWithEmailAndPassword } = useAuth();
+  // const { signInWithEmailAndPassword } = useAuth();
 
-  const handleLogin = () => {
+  const handleLogin = async() => {
     setError(null)
     if (email === '' || password === '') {
       console.log("please fill all feilds");
       return;
     }
-    signInWithEmailAndPassword(email,password)
-    .then(authUser => {
+    await firebaseClient.auth().signInWithEmailAndPassword(email,password)
+    .then(() => {
       console.log("Login successful");
       router.push("/")
-    }).catch(error => {
+    }).catch((error) => {
       setError(error.message)
     });
 

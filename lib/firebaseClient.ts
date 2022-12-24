@@ -1,8 +1,8 @@
-import firebase from 'firebase/compat/app';
+import firebaseClient from 'firebase/compat/app';
 import 'firebase/compat/auth';
 
 const firebaseCredentials = {
-   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
   projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
   storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
@@ -13,8 +13,10 @@ const firebaseCredentials = {
 
 //If an firebase app hasn't already been created
 
-if(!firebase.apps.length){
-  firebase.initializeApp(firebaseCredentials)
+if(typeof window !== "undefined" && !firebaseClient.apps.length){
+  firebaseClient.initializeApp(firebaseCredentials);
+  firebaseClient.auth().setPersistence(firebaseClient.auth.Auth.Persistence.SESSION);
+  (window as any).firebase = firebaseClient;
 }
 
-export default firebase;
+export {firebaseClient};

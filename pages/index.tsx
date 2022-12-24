@@ -1,4 +1,9 @@
 import type { NextPage } from 'next';
+import nookies from "nookies";
+import { firebaseAdmin } from '../lib/firebaseAdmin';
+import {firebaseClient} from '../lib/firebaseClient';
+
+import { InferGetServerSidePropsType, GetServerSidePropsContext } from "next";
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useAuth } from '../context/AuthUserContext';
@@ -12,6 +17,41 @@ import { useStore } from '../store';
 import { AppLayout } from '../component/AppLayout';
 import LandsMenu from '../component/menu';
 import { LocationMarkerIcon } from '@heroicons/react/solid';
+
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+    try {
+      const cookies = nookies.get(ctx);
+      console.log(JSON.stringify(cookies, null, 2));
+      const token = await firebaseAdmin.auth().verifyIdToken(cookies.token);
+      const { uid, email } = token;
+  
+      // the user is authenticated!
+      // FETCH STUFF HERE
+      console.log("The user is authenticated ",uid)
+  
+      return {
+        props: { message: `Your email is ${email} and your UID is ${uid}.` },
+      };
+    } catch (err) {
+        console.log("the error has occured")
+      // either the `token` cookie didn't exist
+      // or token verification failed
+      // either way: redirect to the login page
+      // either the `token` cookie didn't exist
+      // or token verification failed
+      // either way: redirect to the login page
+      return {
+        redirect: {
+          permanent: false,
+          destination: "/login",
+        },
+        // `as never` is required for correct type inference
+        // by InferGetServerSidePropsType below
+        props: {} as never,
+      };
+    }
+  };
+  
 
 const geojson: GeoJSON.FeatureCollection = {
     type: 'FeatureCollection',
@@ -39,14 +79,9 @@ const geojson: GeoJSON.FeatureCollection = {
     ],
 };
 
-const Home: NextPage = () => {
-    const isDrawerOpen = useStore((state) => state.isDrawerOpen);
-    const { authUser, loading, signOut } = useAuth();
+const Home = ( props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     const router = useRouter();
-    useEffect(() => {
-        if (!loading && !authUser)
-          router.push('/login')
-      }, [authUser, loading , router])
+    const isDrawerOpen = useStore((state) => state.isDrawerOpen);
 
     return (
         <>
