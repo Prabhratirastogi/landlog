@@ -39,8 +39,8 @@ const Login = () => {
   //   }
   // }
 
-  const handleLogin = async() => {
-    await firebaseClient.auth().signInWithEmailAndPassword(email,password)
+  const handleLogin = async(data: any) => {
+    await firebaseClient.auth().signInWithEmailAndPassword(data.email,data.password)
     .then(() => {
       console.log("Login successful");
       router.push("/")
