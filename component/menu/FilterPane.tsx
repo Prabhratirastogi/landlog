@@ -1,7 +1,8 @@
-import { MouseEvent } from 'react';
+
 import { classNames } from '../../utils/classNames';
 
-export type states_type = 'all' | 'bh' | 'jh' | 'wb' | 'up' | 'od';
+
+export type states_type = 'all' | 'bh' | 'jh' | 'wb' | 'up' | 'od' | 'gj';
 export const state_names: Record<states_type, string> = {
     all: 'All',
     bh: 'Bihar',
@@ -9,11 +10,13 @@ export const state_names: Record<states_type, string> = {
     wb: 'West Bengal',
     up: 'Uttar pradesh',
     od: 'Odissa',
+    gj: 'Gujrat',
 };
 
 export type SelectableTagProps = {
     filter: states_type;
 };
+
 
 export const SelectableTag = ({ filter }: SelectableTagProps) => {
     const [stateFilter, setStateFilter] = ['all', (e: states_type) => console.log(e)];
@@ -37,7 +40,6 @@ export const SelectableTag = ({ filter }: SelectableTagProps) => {
 
 export const FilterPane = () => {
     const names = Object.keys(state_names) as states_type[];
-
     return (
         <div className="flex flex-row flex-wrap p-2 bg-sky-200 shadow-inner">
             { names.map((state_key, index) => (

@@ -2,6 +2,7 @@ import type { NextPage } from 'next';
 import nookies from "nookies";
 import { firebaseAdmin } from '../lib/firebaseAdmin';
 import {firebaseClient} from '../lib/firebaseClient';
+import axios from "axios";
 
 import { InferGetServerSidePropsType, GetServerSidePropsContext } from "next";
 import { useEffect } from 'react';
@@ -80,6 +81,16 @@ const geojson: GeoJSON.FeatureCollection = {
 const Home = ( props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     const router = useRouter();
     const isDrawerOpen = useStore((state) => state.isDrawerOpen);
+    const get = async()=> {
+        const cityRef = firebaseClient.firestore().collection('lands').doc('NK8ujB1Y8Y2eBsl4YUt');
+        const doc = await cityRef.get();
+        if(!doc.exists){
+            console.log("no such document")
+        }
+        else{
+            console.log("the data is: ",doc.data())
+        }
+    }
 
     return (
         <>
@@ -133,8 +144,9 @@ const Home = ( props: InferGetServerSidePropsType<typeof getServerSideProps>) =>
                     leave="transition-transform transform-gpu ease-out"
                     leaveFrom="translate-y-0"
                     leaveTo="-translate-y-3"
+                    onClick={get}
                 >
-                    <LandsMenu />
+                    <LandsMenu/>
                 </Transition>
             </AppLayout>
         </>

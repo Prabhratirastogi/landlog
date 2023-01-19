@@ -1,5 +1,7 @@
 import firebaseClient from 'firebase/compat/app';
 import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
+import 'firebase/compat/database';
 
 const firebaseCredentials = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
