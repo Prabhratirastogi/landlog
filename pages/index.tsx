@@ -1,11 +1,12 @@
 import type { NextPage } from 'next';
 import nookies from "nookies";
+import { LandSchema } from '../component/menu/LandItem';
+import { useState,useEffect } from 'react';
 import { firebaseAdmin } from '../lib/firebaseAdmin';
 import {firebaseClient} from '../lib/firebaseClient';
 import axios from "axios";
 
 import { InferGetServerSidePropsType, GetServerSidePropsContext } from "next";
-import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useAuth } from '../context/AuthUserContext';
 import Head from 'next/head';
@@ -80,20 +81,34 @@ const geojson: GeoJSON.FeatureCollection = {
 
 const Home = ( props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     const router = useRouter();
+    const[land,setLand] = useState<Array<LandSchema>>([]);
     const isDrawerOpen = useStore((state) => state.isDrawerOpen);
-    const get = async()=> {
-        const cityRef = firebaseClient.firestore().collection('lands').doc('NK8ujB1Y8Y2eBsl4YUt');
+   
+    const get = async() => {
+        const cityRef = firebaseClient.firestore().collection("lands");
         const doc = await cityRef.get();
-        if(!doc.exists){
-            console.log("no such document")
+        if(doc){
+            doc.forEach((d) => {
+                const data = Object.keys(d.data()).sort().reduce(
+                    (obj:any,key:any) => {
+                        obj[key] = d.data()[key];
+                        return obj;
+                    },{}
+                )
+                const prevLand = land;
+                prevLand.push(data);
+                setLand(prevLand);                
+            })
         }
-        else{
-            console.log("the data is: ",doc.data())
-        }
-    }
+    } 
+
+    useEffect(() => {
+      get()
+    }, [])
+    
 
     return (
-        <>
+        <div>
             <Map
                 initialViewState={{
                     longitude: 82.74,
@@ -146,10 +161,10 @@ const Home = ( props: InferGetServerSidePropsType<typeof getServerSideProps>) =>
                     leaveTo="-translate-y-3"
                     onClick={get}
                 >
-                    <LandsMenu/>
+                    <LandsMenu data={land}/>
                 </Transition>
             </AppLayout>
-        </>
+        </div>
     );
 };
 
