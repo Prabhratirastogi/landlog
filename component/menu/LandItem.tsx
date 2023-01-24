@@ -35,7 +35,6 @@ type LandItemProps = {
 
 
 export const LandItem: React.FC<LandItemProps> = ({ ...props }) => {
-    console.log("I am land item and i have values like : ",props.info.name)
     return (
         <div
             className={ classNames(

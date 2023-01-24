@@ -25,28 +25,15 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       const cookies = nookies.get(ctx);
       const token = await firebaseAdmin.auth().verifyIdToken(cookies.token);
       const { uid, email } = token;
-  
-      // the user is authenticated!
-      // FETCH STUFF HERE
-   
-  
       return {
         props: { message: `Your email is ${email} and your UID is ${uid}.` },
       };
     } catch (err) {
-      // either the `token` cookie didn't exist
-      // or token verification failed
-      // either way: redirect to the login page
-      // either the `token` cookie didn't exist
-      // or token verification failed
-      // either way: redirect to the login page
       return {
         redirect: {
           permanent: false,
           destination: "/login",
         },
-        // `as never` is required for correct type inference
-        // by InferGetServerSidePropsType below
         props: {} as never,
       };
     }
@@ -84,7 +71,7 @@ const Home = ( props: InferGetServerSidePropsType<typeof getServerSideProps>) =>
     const[land,setLand] = useState<Array<LandSchema>>([]);
     const isDrawerOpen = useStore((state) => state.isDrawerOpen);
    
-    const get = async() => {
+    const getData = async() => {
         const cityRef = firebaseClient.firestore().collection("lands");
         const doc = await cityRef.get();
         if(doc){
@@ -103,8 +90,8 @@ const Home = ( props: InferGetServerSidePropsType<typeof getServerSideProps>) =>
     } 
 
     useEffect(() => {
-      get()
-    }, [])
+      getData()
+    }, )
     
 
     return (
@@ -159,7 +146,7 @@ const Home = ( props: InferGetServerSidePropsType<typeof getServerSideProps>) =>
                     leave="transition-transform transform-gpu ease-out"
                     leaveFrom="translate-y-0"
                     leaveTo="-translate-y-3"
-                    onClick={get}
+                    onClick={getData}
                 >
                     <LandsMenu data={land}/>
                 </Transition>
