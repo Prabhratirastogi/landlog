@@ -5,8 +5,6 @@
 - Python caters to both Scripting Style Projects (Data Science, ML/DL, etc.) and Application Style Projects (Web Apps, Enterprise Systems, Robotics, etc)
 - When writing Application Style Projects: Python has many demerits. Over the years, various key peices have emerged to solve these issues - Type Annotations, Virtual Environments, Dataclasses, etc.
 
-![](https://www.loom.com/share/dbffcbc64d2f41f5ae0d9a84a82d16d9)
-
 ## Use Git and Github Correctly
 - Create a new branch when starting a new task
 - Make frequent commits (Atleast once per day)
@@ -38,3 +36,7 @@
 - Learn and use Pydantic for serializing and deserializing JSON/YAML/etc
 
 ## Put scripting portions of your code in the `__name__ == '__main__'` block
+
+## A short video
+
+[![A video introducing this document](https://user-images.githubusercontent.com/33483920/214317184-6f1cbc22-ef7e-4d69-b971-aa893194a04d.png)](https://www.loom.com/share/dbffcbc64d2f41f5ae0d9a84a82d16d9)
