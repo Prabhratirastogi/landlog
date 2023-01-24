@@ -1,6 +1,7 @@
 import { MouseEventHandler } from 'react';
 import { classNames } from '../../utils/classNames';
 import { LocationMarkerIcon } from '@heroicons/react/outline';
+import { firebaseClient } from '../../lib/firebaseClient';
 
 export interface LandInfo {
     name: string;
@@ -9,10 +10,29 @@ export interface LandInfo {
     active?: boolean;
 }
 
+export interface LandSchema {
+    branch: string,
+    country: string,
+    deed_number: string,
+    jamabandi_no: string,
+    khata_no: string,
+    land_area_kattha: number,
+    land_lord: string,
+    mauja: string,
+    mutation: boolean,
+    plot_no: string,
+    registry_date: string,
+    state: string,
+    tbcpl_representative: string,
+    thana_no: string
+}
+
 type LandItemProps = {
     info: LandInfo;
     onclick: MouseEventHandler;
 };
+
+
 
 export const LandItem: React.FC<LandItemProps> = ({ ...props }) => {
     return (

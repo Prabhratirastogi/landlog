@@ -1,10 +1,11 @@
-import { MouseEventHandler, useState } from 'react';
+import { MouseEventHandler, useState , useEffect } from 'react';
 import { LandPreviewInfo } from './LandPreviewInfo';
 import { LandFilter } from './LandFilter';
 import { option } from './land-filter-type';
 import { LandDetailItemProps } from './land-detail-types';
 import LandDetailItem from './LandDetailItem';
 import { XCircleIcon } from '@heroicons/react/solid';
+import { firebaseClient } from '../../lib/firebaseClient';
 
 const LandDetailsData: LandDetailItemProps[] = [
     {
@@ -69,8 +70,10 @@ interface LandDetailsProps {
 }
 
 export const LandDetails: React.FC<LandDetailsProps> = ({ close }) => {
+    const [lands , setLands] = useState([{}]);
     const [selectedOption, setSelectedOption] = useState(filter_options[0]);
 
+    
     return (
         <div className="h-96 mx-2 rounded-2xl flex w-fit overflow-hidden divide-sky-200 divide-x shadow-md sm:shadow-2xl ring-1 sm:ring-0 ring-blue-300">
             <div className="h-full bg-blue-100 w-64 sm:w-52 flex flex-col divide-y divide-blue-200">
@@ -81,10 +84,11 @@ export const LandDetails: React.FC<LandDetailsProps> = ({ close }) => {
                             <XCircleIcon className="h-6 hover:text-blue-500 sm:hidden" />
                         </button>
                     </span>
+                    
                     <LandFilter
                         filter_options={ filter_options }
                         selectedOption={ selectedOption }
-                        setSelectedOption={ setSelectedOption }
+                        setSelectedOption={ setSelectedOption }                    
                     />
                 </div>
                 <div className="flex flex-col overflow-y-scroll bg-blue-50 divide-y divide-blue-200">
@@ -100,8 +104,8 @@ export const LandDetails: React.FC<LandDetailsProps> = ({ close }) => {
                                 Math.round((b.count.done * 100) / b.count.total) -
                                 Math.round((a.count.done * 100) / a.count.total),
                         )
-                        .map((landData, index) => (
-                            <LandDetailItem { ...landData } key={ index } />
+                        .map((lands, index) => (
+                            <LandDetailItem { ...lands } key={ index } />
                         )) }
                 </div>
             </div>
