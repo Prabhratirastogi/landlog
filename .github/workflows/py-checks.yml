@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ${{ env.working-directory }}
+        working-directory: "./landspec"
     steps:
       - uses: actions/checkout@v3
       - name: Install Python
@@ -32,7 +32,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ${{ env.working-directory }}
+        working-directory: "./landspec"
     steps:
       - name: Setup Python
         uses: actions/setup-python@v1
