@@ -1,5 +1,5 @@
-[tool.black]
-
+[tool.mypy]
+ignore_missing_imports = True
 
 [tool.ruff]
 line-length = 88
